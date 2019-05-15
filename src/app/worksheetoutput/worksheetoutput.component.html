@@ -1,0 +1,68 @@
+<div *ngIf = "loaded">
+<table>
+  <tr>
+    <td>
+      ICO
+    </td>
+    <td class="numericcell">
+      {{leaseResult.bookCalc.icoValue | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Book Value
+    </td>
+    <td class="numericcell">
+      {{leaseResult.bookCalc.value | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Sale Price
+    </td>
+    <td class="numericcell">
+      {{leaseResult.grossCapCost.salePrice | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Gross Cap Cost
+    </td>
+    <td class="numericcell">
+      {{leaseResult.grossCapCost.value | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Adj Cap Cost
+    </td>
+    <td class="numericcell">
+      {{leaseResult.adjCapCost.value | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Additional Miles Charge
+    </td>
+    <td class="numericcell">
+      {{leaseResult.annualMilesChargeCalc.value | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Residual Calculation
+    </td>
+    <td class="numericcell">
+      {{leaseResult.residualCalculation.value | number : '1.2-2'}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Lease Payment Calculation
+    </td>
+    <td class="numericcell">
+      {{leaseResult.pmtCalc.value | number : '1.2-2'}}
+    </td>
+  </tr>
+</table>
+</div>

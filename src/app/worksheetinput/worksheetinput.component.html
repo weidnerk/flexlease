@@ -1,0 +1,85 @@
+<div>
+  <mat-form-field appearance="outline" class="outlinepadding">
+    <input matInput style="width:100px;" type="text" #appid placeholder="Enter App ID">
+  </mat-form-field>
+  <button mat-button (click)="getData(appid.value)">
+    <mat-icon>folder_open</mat-icon>
+  </button>&nbsp;
+  <span *ngIf="loadingLease">
+    <img
+      src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  </span>
+  <span style="color:red">{{ errorMessage }}</span>
+</div>
+<br />
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div class="row">
+    <div class="col-sm-9 col-xs-9">
+      <div>
+        <mat-form-field appearance="outline" class="firstname outlinepadding">
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName" placeholder="First name" maxlength="15" class="matinput">
+        </mat-form-field>&nbsp;
+        <mat-form-field appearance="outline" class="lastname outlinepadding">
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" placeholder="Last Name" maxlength="15" class="matinput">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Zip</mat-label>
+          <input matInput formControlName="zip" placeholder="Zip" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>VIN</mat-label>
+          <input matInput formControlName="VIN" placeholder="VIN" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Book Value</mat-label>
+          <input matInput formControlName="bookValue" placeholder="Book Value" maxlength="18" class="matinput">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Make</mat-label>
+          <input matInput formControlName="make" placeholder="Make" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Model</mat-label>
+          <input matInput formControlName="model" placeholder="Model" maxlength="18" class="matinput">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Year</mat-label>
+          <input matInput formControlName="year" placeholder="Year" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Miles</mat-label>
+          <input matInput formControlName="miles" placeholder="Miles" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Cash Down</mat-label>
+          <input matInput formControlName="cashDown" placeholder="Cash Down" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Term</mat-label>
+          <input matInput formControlName="term" placeholder="Term" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Tag</mat-label>
+          <input matInput formControlName="tag" placeholder="Tag" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+    </div>
+  </div>
+</form>

@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_ENDPOINT: 'http://localhost:64995/api/v1/leases/',
+  API_VEHICLE_ENDPOINT: 'http://localhost:64995/api/v1/vehicles/',
+  LOGIN_API_ENDPOINT: 'http://localhost:64995/api/v1/membership/',
+  API_KEY: '1caa374a-3825-4ea5-ac02-3ea703385413'
 };
 
 /*
@@ -14,3 +18,6 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+// CMS API Company Controller defines a route prefix, whereas FloorPlannerController does not
+//

@@ -1,0 +1,89 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 250px;
+}
+.sidenavIcon {
+  width: 75px;
+}
+
+/* schematics added this but then "Menu", top left, does not have purple background */
+// .sidenav .mat-toolbar {
+//   background: inherit;
+// }
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+// moves menu items to the right although deprecated solution
+// https://stackoverflow.com/questions/48939324/remove-padding-from-mat-list-item
+// :host /deep/ .mat-list-item-content {
+//   padding: 0!important;
+// }
+
+// List container classes from https://stackblitz.com/edit/angular-94jjyp?file=src%2Fapp%2Fapp.component.css
+// All they do is add borders and tighten up spacing
+// .list-container {
+//   width: 100%;
+//   padding-top: 1px;
+//   border-right: 1px solid;
+//   border-color: #ddd;
+//   text-align: center;
+// }
+
+// .list-container .mat-list-item {
+//   border: 1px solid;
+//   border-right: 0px;
+//   border-color: #ddd;
+//   margin-top: -1px;
+//   height: 40px;
+// }
+
+.example-container {
+  height: 500px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.example-sidenav {
+   user-select: none;
+}
+.full-width {
+  width: 100%;
+}
+.menu-button {
+  transition: 300ms ease-in-out;
+  transform: rotate(0deg);
+}
+.menu-button.rotated {
+  transform: rotate(180deg);
+}
+.submenu {
+  overflow-y: hidden;
+  transition: transform 300ms ease;
+  transform: scaleY(0);
+  transform-origin: top;
+  padding-left: 30px;
+}
+.submenu.expanded {
+  transform: scaleY(1);
+}
+.hidden {
+  display: none;
+}
+.fill-space {
+  flex: 1 1 auto;
+}
+.toolbarlinkcolor {
+  color:white;
+  font-size: 12px;
+}

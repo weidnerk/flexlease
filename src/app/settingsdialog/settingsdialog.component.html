@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-sm-9 col-xs-9">
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Min ind income</mat-label>
+          <input matInput formControlName="minIndIncome" placeholder="Min ind income" maxlength="18" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+    </div>
+  </div>
+</form>

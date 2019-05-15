@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+
+	<mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+		[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+		[opened]="!(isHandset$ | async)">
+		<mat-toolbar color="primary">
+			<!-- <button mat-icon-button (click)="isExpanded = !isExpanded">
+				<mat-icon>home</mat-icon>
+			</button> -->
+			<h2>Menu</h2>
+		</mat-toolbar>
+
+		<!-- draw the menu items -->
+		<mat-nav-list class="list-container">
+			<mat-list-item *ngFor="let route of routes; let i = index" [routerLink]="route.path">
+				<mat-icon>{{route.icon}}</mat-icon>&emsp;{{route.name}}
+			</mat-list-item>
+		</mat-nav-list>
+
+	</mat-sidenav>
+
+	<mat-sidenav-content>
+		<!-- drawing the hamburger button -->
+		<mat-toolbar color="primary">
+			<button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+				<mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+			</button>
+			<span>FLEX Leasing</span>
+			<span class="fill-space"></span>
+			<span>
+				<!-- <a [routerLink]="['/compareimages']" class="toolbarlinkcolor">Image compare</a> -->
+				<button mat-menu-item (click)="onLogout()">Logout</button>
+			 </span>     
+		</mat-toolbar>
+
+		<!-- Add Content Here and starts to add dark background-->
+		<ng-content></ng-content>
+	</mat-sidenav-content>
+</mat-sidenav-container>

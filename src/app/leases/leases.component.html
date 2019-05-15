@@ -1,0 +1,20 @@
+<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
+  <div fxLayout="row wrap">
+    <!-- loop over the cardList and show the cards -->
+    <div
+      *ngFor="let lease of leases"
+      fxFlex="25"
+      fxFlex.md="33"
+      fxFlex.sm="50"
+      fxFlex.xs="100"
+      fxLayout="column"
+      style="padding: 5px;"
+    >
+      <!-- cards here -->
+      <mat-card class="mat-elevation-z1">
+        <mat-card-title> {{ lease.lenderAppId }} </mat-card-title>
+        <mat-card-content> {{ lease.dealerName }} </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
