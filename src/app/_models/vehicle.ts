@@ -12,4 +12,7 @@ export interface VehicleMake {
 export interface VehicleModel {
     ID: number;
     model: string;
+    rating: string;
+    makeId: number;
+    makeEntity: VehicleMake;
 }

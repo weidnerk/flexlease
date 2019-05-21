@@ -1,3 +1,7 @@
+<div *ngIf='loading'>
+  <mat-spinner mode="indeterminate"></mat-spinner>
+  <b>Loading...</b>
+</div>
 <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
   <div fxLayout="row wrap">
     <!-- loop over the cardList and show the cards -->
@@ -12,8 +16,10 @@
     >
       <!-- cards here -->
       <mat-card class="mat-elevation-z1">
-        <mat-card-title> {{ lease.lenderAppId }} </mat-card-title>
-        <mat-card-content> {{ lease.dealerName }} </mat-card-content>
+        <mat-card-title> {{lease.lastName}}, {{lease.firstName}}</mat-card-title>
+        <mat-card-content>App ID: {{lease.lenderAppId}}<br/>{{lease.dealerName}}<br/>
+          <a [routerLink]="['/worksheet', lease.lenderAppId]">worksheet</a>
+         </mat-card-content>
       </mat-card>
     </div>
   </div>

@@ -14,7 +14,7 @@ export class SettingsComponent implements OnInit {
               private router: Router,
     ) {
     const dialogRef = this.dialog.open(SettingsdialogComponent, {
-      height: '300px',
+      height: '400px',
       width: '300px'
     });
 
@@ -22,12 +22,10 @@ export class SettingsComponent implements OnInit {
       console.log('The dialog was closed');
       this.router.navigate(['/']);
     });
-
   }
 
   ngOnInit() {
 
   }
-
-
 }
+

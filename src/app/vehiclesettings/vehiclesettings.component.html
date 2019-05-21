@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <mat-form-field>
     <mat-label>Make</mat-label>
     <mat-select formControlName="make" placeholder="Make" (selectionChange)="makeSelected($event)">
@@ -17,6 +17,13 @@
         {{ m.model }}
       </mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field>&nbsp;
+  <mat-form-field appearance="outline" class="outlinepadding">
+    <mat-label>Rating</mat-label>
+    <input matInput formControlName="rating" placeholder="Rating" maxlength="18" class="matinput">
+  </mat-form-field>&nbsp;
+  &nbsp;
+  <button color="accent" type="submit" color="primary" mat-raised-button>Save</button>
 </form>
 
+<span style="color:red">{{ errorMessage }}</span>

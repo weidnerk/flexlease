@@ -31,7 +31,7 @@ export class LeasesComponent implements OnInit {
 
   getLeases() {
     this.loading = true;
-    this.leaseService.getLeases().subscribe(
+    this.leaseService.getValues<Lease>('Lease').subscribe(
       data => {
         this.leases = data;
         this.loading = false;

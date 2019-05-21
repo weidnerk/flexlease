@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SettingsComponent } from './settings.component';
 import { routing } from './settings.routes';
 import { SettingsdialogComponent } from '../settingsdialog/settingsdialog.component';
-import { MatDialogModule, MatInputModule } from '@angular/material';
+import { MatDialogModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LeaseService } from '../_services/lease.service';
 
 @NgModule({
   declarations: [SettingsComponent,
@@ -14,8 +15,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     routing,
     MatDialogModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
-  entryComponents: [SettingsdialogComponent]
+  entryComponents: [SettingsdialogComponent],
+  providers: [LeaseService],
 })
 export class SettingsModule { }

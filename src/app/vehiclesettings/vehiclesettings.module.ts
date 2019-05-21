@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VehiclesettingsComponent } from './vehiclesettings.component';
 import { routing } from './vehiclesettings.routes';
-import { MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
+import { MatInputModule, MatOptionModule, MatSelectModule, MatButtonModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LeaseService } from '../_services/lease.service';
 
@@ -14,7 +14,8 @@ import { LeaseService } from '../_services/lease.service';
     MatInputModule,
     MatOptionModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   providers: [LeaseService]
 })

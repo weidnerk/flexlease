@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatListModule, MatCardModule, MatInputModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatListModule, MatCardModule, MatInputModule, MatIconModule, MatSliderModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,7 +25,8 @@ import { SharedService } from '../_services/shared.service';
     ReactiveFormsModule,
     MatIconModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+    MatSliderModule
   ],
   providers: [LeaseService, SharedService],
 

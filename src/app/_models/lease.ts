@@ -12,6 +12,7 @@ export interface CustomerApp {
     tag: number;
     lenderAppId: number;
     dealerName: string;
+    annualMiles: number;
 }
 export interface CustomerAppAddress {
     zip: string;
@@ -33,10 +34,12 @@ export interface ResidualCalculation {
     pct: number;
     pctDeduct: number;
     calc: number;
+    carRating: string;
 }
 export interface GrossCapCost {
     salePrice: number;
     value: number;
+    dealerDocFee: number;
 }
 export interface AdjCapCost {
     value: number;

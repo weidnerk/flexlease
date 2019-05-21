@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LeasesComponent } from './leases.component';
 import { routing } from './leases.routes';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule, MatCardModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatCardModule } from '@angular/material';
 import { LeaseService } from '../_services/lease.service';
 @NgModule({
   declarations: [LeasesComponent],
@@ -11,7 +11,8 @@ import { LeaseService } from '../_services/lease.service';
     CommonModule,
     routing,
     FlexLayoutModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [LeaseService],
 })
