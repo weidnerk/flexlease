@@ -8,6 +8,7 @@ export const environment = {
   API_VEHICLE_ENDPOINT: 'http://localhost:64995/api/v1/vehicles/',
   API_MAINT_ENDPOINT: 'http://localhost:64995/api/v1/maintenancevalues/',
   LOGIN_API_ENDPOINT: 'http://localhost:64995/api/v1/membership/',
+  API_DEALER_ENDPOINT: 'http://localhost:64995/api/v1/dealers/',
   API_KEY: '1caa374a-3825-4ea5-ac02-3ea703385413'
 };
 

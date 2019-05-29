@@ -11,13 +11,13 @@ import { MatSidenav } from '@angular/material';
   styleUrls: ['./main-nav.component.scss']
 })
 export class MainNavComponent {
-  @ViewChild('drawer') drawer: MatSidenav;
+  @ViewChild('drawer', { static: true }) drawer: MatSidenav;
   routes = [
     { path: '/', name: 'Home', icon: 'home' },
     { path: 'leases', name: 'Leases', icon: 'folder' },
     { path: 'settings', name: 'Settings', icon: 'settings' },
     { path: 'vehiclesettings', name: 'Vehicle Settings', icon: 'settings_applications' },
-    { path: 'dealers', name: 'Dealers', icon: 'people' },
+    { path: 'dealers', name: 'Franchise Dealers', icon: 'people' },
     { path: 'worksheet', name: 'Worksheet', icon: 'graphic_eq' }
   ];
 

@@ -6,10 +6,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 export const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'leases', loadChildren: './leases/leases.module#LeasesModule', canActivate: [AuthGuard] },
-  { path: 'dealers', loadChildren: './dealers/dealers.module#DealersModule', canActivate: [AuthGuard] },
-  { path: 'vehiclesettings', loadChildren: './vehiclesettings/vehiclesettings.module#VehiclesettingsModule', canActivate: [AuthGuard] },
-  { path: 'worksheet/:appid', loadChildren: './worksheet/worksheet.module#WorksheetModule', canActivate: [AuthGuard] },
-  { path: 'settings', loadChildren: './settings/settings.module#SettingsModule', canActivate: [AuthGuard] },
+  { path: 'leases', loadChildren: () => import('./leases/leases.module').then(m => m.LeasesModule), canActivate: [AuthGuard] },
+  { path: 'dealers', loadChildren: () => import('./dealers/dealers.module').then(m => m.DealersModule), canActivate: [AuthGuard] },
+  { path: 'vehiclesettings', loadChildren: () => import('./vehiclesettings/vehiclesettings.module').then(m => m.VehiclesettingsModule), canActivate: [AuthGuard] },
+  { path: 'worksheet/:appid', loadChildren: () => import('./worksheet/worksheet.module').then(m => m.WorksheetModule), canActivate: [AuthGuard] },
+  { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule), canActivate: [AuthGuard] },
+  { path: 'dealersettings/:dealerid', loadChildren: () => import('./dealersettings/dealersettings.module').then(m => m.DealersettingsModule), canActivate: [AuthGuard] },
   { path: '', redirectTo: '/', pathMatch: 'full' },
 ];

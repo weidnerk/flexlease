@@ -23,6 +23,7 @@ export class LeaseService {
     private getModelsUrl: string = environment.API_VEHICLE_ENDPOINT + 'vehiclemodels';
     private getMaintenanceValueUrl: string = environment.API_MAINT_ENDPOINT;
     private getMaintValueArrayUrl: string = environment.API_MAINT_ENDPOINT + 'array';
+    private getDealersUrl: string = environment.API_DEALER_ENDPOINT + 'dealers';
 
     private postMaintenanceValueUrl: string = environment.API_MAINT_ENDPOINT;
     private postVehicleModelValueUrl: string = environment.API_VEHICLE_ENDPOINT;
@@ -38,6 +39,7 @@ export class LeaseService {
         getListUrlMap.set('Lease', this.getLeasesUrl);
         getListUrlMap.set('VehicleMake', this.getMakesUrl);
         getListUrlMap.set('VehicleModel', this.getModelsUrl);
+        getListUrlMap.set('FLEXDealer', this.getDealersUrl);
 
         getFromArrayUrlMap.set('MaintenanceValue', this.getMaintValueArrayUrl);
 
@@ -86,11 +88,15 @@ export class LeaseService {
     }
 
     // Get list of values (such as tblMakes, but tblModels needs makeId)
-    // Optionally pass id
-    getValues<T>(typeName: string, id?: number): Observable<T[]> {
+    // Optionally pass either an id or a 2D array of a field name and value to search
+    // Don't know how to pass a predicate to the API
+    getValues<T>(typeName: string, id?: number, where?: string[]): Observable<T[]> {
         let url = getListUrlMap.get(typeName);
         if (id !== undefined) {
             url = url + '/' + id;
+        }
+        if (where !== undefined) {
+            url = url + '?' + where[0] + '=' + where[1];
         }
         const userJson = localStorage.getItem('currentUser');
         if (userJson) {

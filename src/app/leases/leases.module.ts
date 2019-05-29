@@ -14,6 +14,6 @@ import { LeaseService } from '../_services/lease.service';
     MatCardModule,
     MatProgressSpinnerModule
   ],
-  providers: [LeaseService],
+  providers: [LeaseService]
 })
 export class LeasesModule { }

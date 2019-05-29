@@ -29,17 +29,17 @@ export class WorksheetinputComponent implements OnInit {
   loadingVehicle = false;
 
   // 'Annual miles elected' slider settings
-  private autoTicks = false;
-  private disabled = false;
-  private invert = false;
-  private max = 18000;
-  private min = 15000;
-  private showTicks = true;
-  private step = 1000;
-  private thumbLabel = true;
-  private value = 0;
-  private vertical = false;
-  private _tickInterval = 1;
+  autoTicks = false;
+  disabled = false;
+  invert = false;
+  max = 18000;
+  min = 15000;
+  showTicks = true;
+  step = 1000;
+  thumbLabel = true;
+  value = 0;
+  vertical = false;
+  _tickInterval = 1;
   // End slider settings
 
   constructor(private fb: FormBuilder,

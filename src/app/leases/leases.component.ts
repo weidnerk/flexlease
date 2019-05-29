@@ -8,7 +8,6 @@ import { LeaseService } from '../_services/lease.service';
   styleUrls: ['./leases.component.sass']
 })
 export class LeasesComponent implements OnInit {
-  public cardList: CardInterface[] = [];
   leases: Lease[];
   loading = false;
   errorMessage: string;
@@ -46,8 +45,8 @@ export class LeasesComponent implements OnInit {
   }
 
 }
-export interface CardInterface {
-  imgSrc: string;
-  title: string;
-  description: string;
-}
+// export interface CardInterface {
+//   imgSrc: string;
+//   title: string;
+//   description: string;
+// }

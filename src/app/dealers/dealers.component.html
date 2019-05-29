@@ -1,3 +1,28 @@
-<p>
-  dealers works!
-</p>
+<div *ngIf='loading'>
+  <mat-spinner mode="indeterminate"></mat-spinner>
+  <b>Loading...</b>
+</div>
+<!-- don't forget to include FlexLayoutModule -->
+<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
+  <div fxLayout="row wrap">
+    <div class="layout-row" *ngFor="let dealer of dealers" fxFlex="20" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100"
+      style="padding: 5px;">
+      <!-- cards here -->
+      <mat-card class="mat-elevation-z1">
+        <mat-card-header>
+            <img *ngIf="dealer.state == 'FL'" mat-card-avatar src="https://www.oshaeducationcenter.com/images/state-florida.png">
+            <img *ngIf="dealer.state == 'NC'" mat-card-avatar src="http://www.saferstates.org/assets/details-page-images/northcarolina.png">
+            <img *ngIf="dealer.state == 'TX'" mat-card-avatar src="https://www.womply.com/wp-content/uploads/2018/04/TX-300x284.png">
+            <img *ngIf="dealer.state == 'SC'" mat-card-avatar src="http://respectmyvote.com/wp-content/uploads/2016/07/034089-simple-red-glossy-icon-culture-state-south-carolina.png">
+            <img *ngIf="dealer.state == 'GA'" mat-card-avatar src="http://www.clker.com/cliparts/a/b/6/6/12428080851245123608State_of_Georgia.svg.med.png">
+          <mat-card-title>
+            <a style="text-decoration: none;" [routerLink]="['/dealersettings', dealer.id]">{{dealer.dba}}</a>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>{{dealer.city}}, {{dealer.state}}<br/>
+          Id: {{dealer.id}}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

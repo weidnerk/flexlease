@@ -2,7 +2,7 @@
   <mat-form-field appearance="outline" class="outlinepadding">
     <input matInput style="width:100px;" type="text" #appid placeholder="Enter App ID">
   </mat-form-field>
-  <button mat-button (click)="getData(appid.value)">
+  <button mat-button (click)="getData()">
     <mat-icon>folder_open</mat-icon>
   </button>&nbsp;
   <span *ngIf="loadingLease">
