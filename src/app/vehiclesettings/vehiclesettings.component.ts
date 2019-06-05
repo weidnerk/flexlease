@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LeaseService } from '../_services/lease.service';
+import { DataService } from '../_services/data.service';
 import { VehicleMake, VehicleModel } from '../_models';
 import { MatSelectChange, MatOption } from '@angular/material';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,8 +19,8 @@ export class VehiclesettingsComponent implements OnInit {
   loading = false;
 
   constructor(private fb: FormBuilder,
-              private leaseService: LeaseService,
-              private router: Router) { }
+    private dataService: DataService,
+    private router: Router) { }
 
   get makeId() { return this.form.get('make'); }
   get modelId() { return this.form.get('model'); }
@@ -35,7 +34,7 @@ export class VehiclesettingsComponent implements OnInit {
 
   getMakes() {
     this.loading = true;
-    this.leaseService.getValues<VehicleMake>('VehicleMake')
+    this.dataService.getValues<VehicleMake>('VehicleMake')
       .subscribe(x => {
         this.makes = x;
         this.loading = false;
@@ -48,7 +47,7 @@ export class VehiclesettingsComponent implements OnInit {
 
   getModels(makeId: number) {
     this.loading = true;
-    this.leaseService.getValues<VehicleModel>('VehicleModel', makeId)
+    this.dataService.getValues<VehicleModel>('VehicleModel', makeId)
       .subscribe(x => {
         this.models = x;
         this.loading = false;
@@ -93,17 +92,17 @@ export class VehiclesettingsComponent implements OnInit {
     };
     // console.log(selectedData.value);
 
-    this.leaseService.getValue<VehicleModel>('VehicleModel', selectedData.value)
-    .subscribe(x => {
-      const model = x;
-      this.form.patchValue({
-        rating: model.rating
-      });
+    this.dataService.getValue<VehicleModel>('VehicleModel', selectedData.value)
+      .subscribe(x => {
+        const model = x;
+        this.form.patchValue({
+          rating: model.rating
+        });
 
-    },
-      error => {
-        this.errorMessage = error;
-      });
+      },
+        error => {
+          this.errorMessage = error;
+        });
 
   }
 
@@ -113,20 +112,20 @@ export class VehiclesettingsComponent implements OnInit {
     console.log('rating ' + this.rating.value.toUpperCase());
 
     if (this.form.valid) {
-    let model = {} as VehicleModel;
-    model.ID = this.modelId.value;
-    model.rating = this.rating.value.toUpperCase();
+      let model = {} as VehicleModel;
+      model.ID = this.modelId.value;
+      model.rating = this.rating.value.toUpperCase();
 
-    this.leaseService.storeValue<VehicleModel>('VehicleModel', model).subscribe(
-      data => {
-        this.router.navigate(['/']);
-      },
-      error => {
-        console.log('storeMaintValue: ' + error);
-      }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
-    );
+      this.dataService.storeValue<VehicleModel>('VehicleModel', model).subscribe(
+        data => {
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.log('storeMaintValue: ' + error);
+        }
+        ,      // in case of failure show this message
+        () => console.log('Job Done Post !')
+      );
     } else {
       this.errorMessage = 'Form is invalid.';
     }

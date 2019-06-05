@@ -4,7 +4,7 @@ import { VehiclesettingsComponent } from './vehiclesettings.component';
 import { routing } from './vehiclesettings.routes';
 import { MatInputModule, MatOptionModule, MatSelectModule, MatButtonModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LeaseService } from '../_services/lease.service';
+import { DataService } from '../_services/data.service';
 
 @NgModule({
   declarations: [VehiclesettingsComponent],
@@ -17,6 +17,6 @@ import { LeaseService } from '../_services/lease.service';
     ReactiveFormsModule,
     MatButtonModule
   ],
-  providers: [LeaseService]
+  providers: [DataService]
 })
 export class VehiclesettingsModule { }

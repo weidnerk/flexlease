@@ -5,7 +5,7 @@ import { routing } from './settings.routes';
 import { SettingsdialogComponent } from '../settingsdialog/settingsdialog.component';
 import { MatDialogModule, MatInputModule, MatButtonModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LeaseService } from '../_services/lease.service';
+import { DataService } from '../_services/data.service';
 
 @NgModule({
   declarations: [SettingsComponent,
@@ -19,6 +19,6 @@ import { LeaseService } from '../_services/lease.service';
     MatButtonModule
   ],
   entryComponents: [SettingsdialogComponent],
-  providers: [LeaseService],
+  providers: [DataService],
 })
 export class SettingsModule { }

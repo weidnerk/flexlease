@@ -19,7 +19,7 @@
       <mat-card class="mat-elevation-z1">
         <mat-card-title> {{lease.lastName}}, {{lease.firstName}}</mat-card-title>
         <mat-card-content><br/>{{lease.dealerName}}<br/>
-          <a [routerLink]="['/worksheet', lease.lenderAppId]">App ID: {{lease.lenderAppId}}</a>
+          App ID: <a [routerLink]="['/lease', lease.lenderAppId]">{{lease.lenderAppId}}</a>
          </mat-card-content>
       </mat-card>
     </div>

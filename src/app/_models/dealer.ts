@@ -3,4 +3,7 @@ export interface FLEXDealer {
     dba: string;
     city: string;
     state: string;
+    cmsCompanyId: number;
+    serviceFee: number;
 }
+

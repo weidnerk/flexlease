@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Lease, CustomerApp } from '../_models/index';
 import { Vehicle } from '../_models/index';
-import { LeaseService } from '../_services/lease.service';
+import { DataService } from '../_services/data.service';
 import { SharedService } from '../_services/shared.service';
 
 const FIRSTNAME_REGEX = /^[a-zA-Z]+$/;
@@ -43,7 +43,7 @@ export class WorksheetinputComponent implements OnInit {
   // End slider settings
 
   constructor(private fb: FormBuilder,
-              private leaseService: LeaseService,
+              private dataService: DataService,
               private sharedService: SharedService) { }
 
   ngOnInit() {
@@ -120,7 +120,7 @@ export class WorksheetinputComponent implements OnInit {
   // Get lease and calculate
   getLease() {
     this.loadingLease = true;
-    this.leaseService.getValue<Lease>('Lease', this.appid).subscribe(
+    this.dataService.getValue<Lease>('Lease', this.appid).subscribe(
       data => {
         this.lease = data;
         this.loadingLease = false;
@@ -149,7 +149,7 @@ export class WorksheetinputComponent implements OnInit {
 
   getVehicle() {
     this.loadingVehicle = true;
-    this.leaseService.getValue<Vehicle>('Vehicle', this.appid).subscribe(
+    this.dataService.getValue<Vehicle>('Vehicle', this.appid).subscribe(
       data => {
         this.vehicle = data;
         this.loadingVehicle = false;
@@ -186,7 +186,7 @@ export class WorksheetinputComponent implements OnInit {
        annualMiles: this.annualMilesElected.value
     };
 
-    this.leaseService.storeValue<CustomerApp>('CustomerApp', customerApp).subscribe(
+    this.dataService.storeValue<CustomerApp>('CustomerApp', customerApp).subscribe(
       data => {
       },
       error => {

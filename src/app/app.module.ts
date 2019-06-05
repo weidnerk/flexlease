@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule, MatToolbarModule, MatIconModule, MatListModule, MatCardModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
@@ -37,7 +38,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatButtonModule,
     HttpClientModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    NgxChartsModule
   ],
   providers: [AuthenticationService, AuthGuard],
   bootstrap: [AppComponent]
