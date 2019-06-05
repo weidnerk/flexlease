@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
-import { LeaseService } from '../_services/lease.service';
+import { DataService } from '../_services/data.service';
 import { MaintenanceValue } from '../_models/MaintenanceValue';
 
 @Component({
@@ -16,7 +16,7 @@ export class SettingsdialogComponent implements OnInit {
   form: FormGroup;
   constructor(private fb: FormBuilder,
               private dialogRef: MatDialogRef<SettingsdialogComponent>,
-              private leaseService: LeaseService) { }
+              private dataService: DataService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -50,7 +50,7 @@ export class SettingsdialogComponent implements OnInit {
     let maintValue = {} as MaintenanceValue[];
     this.loading = true;
     let idarray: number[] = [904, 905];
-    this.leaseService.getValueArray<MaintenanceValue>('MaintenanceValue', idarray).subscribe(
+    this.dataService.getValueArray<MaintenanceValue>('MaintenanceValue', idarray).subscribe(
       data => {
         maintValue = data;
         this.loading = false;
@@ -91,7 +91,7 @@ export class SettingsdialogComponent implements OnInit {
     minJointIncomeItem.id = 905;
     arr.push(minJointIncomeItem);
 
-    this.leaseService.storeValueArray<MaintenanceValue>('MaintenanceValue', arr).subscribe(
+    this.dataService.storeValueArray<MaintenanceValue>('MaintenanceValue', arr).subscribe(
       data => {
 
       },

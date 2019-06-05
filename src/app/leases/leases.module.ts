@@ -4,7 +4,7 @@ import { LeasesComponent } from './leases.component';
 import { routing } from './leases.routes';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule, MatCardModule } from '@angular/material';
-import { LeaseService } from '../_services/lease.service';
+import { DataService } from '../_services/data.service';
 @NgModule({
   declarations: [LeasesComponent],
   imports: [
@@ -14,6 +14,6 @@ import { LeaseService } from '../_services/lease.service';
     MatCardModule,
     MatProgressSpinnerModule
   ],
-  providers: [LeaseService]
+  providers: [DataService]
 })
 export class LeasesModule { }

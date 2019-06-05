@@ -8,7 +8,7 @@ import { WorksheetComponent } from './worksheet.component';
 import { WorksheetinputComponent } from '../worksheetinput/worksheetinput.component';
 import { WorksheetoutputComponent } from '../worksheetoutput/worksheetoutput.component';
 import { routing } from './worksheet.routes';
-import { LeaseService } from '../_services/lease.service';
+import { DataService } from '../_services/data.service';
 import { SharedService } from '../_services/shared.service';
 
 @NgModule({
@@ -28,7 +28,7 @@ import { SharedService } from '../_services/shared.service';
     HttpClientModule,
     MatSliderModule
   ],
-  providers: [LeaseService, SharedService],
+  providers: [DataService, SharedService]
 
 })
 export class WorksheetModule { }

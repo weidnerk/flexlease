@@ -1,3 +1,20 @@
-<p>
-    dialog Dealer id: {{data.dealerid}}
-</p>
+{{errorMessage}}
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h3 *ngIf='dealer'>{{dealer.dba}}</h3>
+    <div>
+      <mat-form-field appearance="outline" class="outlinepadding">
+        <mat-label>CMS id</mat-label>
+        <input matInput formControlName="cmsid" placeholder="cmsid" maxlength="18" class="matinput">
+      </mat-form-field>&nbsp;
+    </div>
+    <div>
+      <mat-form-field appearance="outline" class="outlinepadding">
+        <mat-label>Dealer Doc Fee</mat-label>
+        <input matInput formControlName="dealerDocFee" placeholder="Dealer doc fee" maxlength="18" class="matinput">
+      </mat-form-field>&nbsp;
+    </div>
+    <div mat-dialog-actions>
+      <button color="accent" type="submit" color="primary" mat-raised-button>Save</button>
+      <button mat-button type="button" (click)="onCancel()" tabindex="-1">Cancel</button>
+    </div>
+</form>

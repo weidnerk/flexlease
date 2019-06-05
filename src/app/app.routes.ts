@@ -11,6 +11,7 @@ export const routes: Routes = [
   { path: 'vehiclesettings', loadChildren: () => import('./vehiclesettings/vehiclesettings.module').then(m => m.VehiclesettingsModule), canActivate: [AuthGuard] },
   { path: 'worksheet/:appid', loadChildren: () => import('./worksheet/worksheet.module').then(m => m.WorksheetModule), canActivate: [AuthGuard] },
   { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule), canActivate: [AuthGuard] },
-  { path: 'dealersettings/:dealerid', loadChildren: () => import('./dealersettings/dealersettings.module').then(m => m.DealersettingsModule), canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: 'lease/:appid', loadChildren: () => import('./lease/lease.module').then(m => m.LeaseModule), canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/', pathMatch: 'full' }
 ];
+
