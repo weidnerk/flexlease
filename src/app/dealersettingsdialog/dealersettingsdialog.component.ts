@@ -75,8 +75,8 @@ export class DealersettingsdialogComponent implements OnInit {
     if (this.form.valid) {
       let dealer = {} as FLEXDealer;
       dealer.id = this.dealer.id;
-      dealer.cmsCompanyId = this.cmsid.value;
-      dealer.serviceFee = this.dealerDocFee.value;
+      dealer.cmsCompanyId = this.cmsid!.value;
+      dealer.serviceFee = this.dealerDocFee!.value;
 
       this.dataService.storeValue<FLEXDealer>('FLEXDealer', dealer).subscribe(
         data => {

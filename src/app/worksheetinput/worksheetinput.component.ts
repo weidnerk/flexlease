@@ -24,7 +24,7 @@ export class WorksheetinputComponent implements OnInit {
   lease: Lease;
   vehicle: Vehicle;
   form: FormGroup;
-  errorMessage: string;
+  errorMessage: string | null;
   loadingLease = false;
   loadingVehicle = false;
 
@@ -128,10 +128,10 @@ export class WorksheetinputComponent implements OnInit {
         this.form.patchValue({
           firstName: this.lease.customerApp.firstName,
           lastName: this.lease.customerApp.lastName,
-          zip: this.lease.customerApp.currentAddress.zip,
-          cashDown: this.lease.customerApp.cashDown,
-          miles: this.lease.customerApp.vehicle.miles,
-          year: this.lease.customerApp.vehicle.year,
+          zip: this.lease.customerApp.currentAddress!.zip,
+          cashDown: this.lease.customerApp!.cashDown,
+          miles: this.lease.customerApp.vehicle!.miles,
+          year: this.lease.customerApp.vehicle!.year,
           term: this.lease.customerApp.term,
           tag: this.lease.customerApp.tag,
           annualMilesElected: this.lease.customerApp.annualMiles
@@ -171,7 +171,6 @@ export class WorksheetinputComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.annualMilesElected.value);
 
     const customerApp: CustomerApp = {
        lenderAppId: this.appid,
@@ -183,7 +182,7 @@ export class WorksheetinputComponent implements OnInit {
        term: 0,
        tag: 0,
        dealerName: null,
-       annualMiles: this.annualMilesElected.value
+       annualMiles: this.annualMilesElected!.value
     };
 
     this.dataService.storeValue<CustomerApp>('CustomerApp', customerApp).subscribe(

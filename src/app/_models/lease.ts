@@ -6,12 +6,12 @@ export interface CustomerApp {
     firstName: string;
     lastName: string;
     cashDown: number;
-    currentAddress: CustomerAppAddress;
-    vehicle: CustomerAppVehicle;
+    currentAddress: CustomerAppAddress | null;
+    vehicle: CustomerAppVehicle | null;
     term: number;
     tag: number;
     lenderAppId: number;
-    dealerName: string;
+    dealerName: string | null;
     annualMiles: number;
 }
 export interface CustomerAppAddress {

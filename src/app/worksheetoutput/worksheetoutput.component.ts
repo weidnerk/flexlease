@@ -9,7 +9,7 @@ import { SharedService } from '../_services/shared.service';
 })
 export class WorksheetoutputComponent implements OnInit {
   @Input() result: LeaseResult;
-  leaseResult: LeaseResult = null;
+  leaseResult: LeaseResult | null = null;
   loaded = false;
 
   constructor(private sharedService: SharedService) { }

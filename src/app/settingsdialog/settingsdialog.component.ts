@@ -49,12 +49,12 @@ export class SettingsdialogComponent implements OnInit {
   loadData() {
     let maintValue = {} as MaintenanceValue[];
     this.loading = true;
-    let idarray: number[] = [904, 905];
+    const idarray: number[] = [904, 905];
     this.dataService.getValueArray<MaintenanceValue>('MaintenanceValue', idarray).subscribe(
       data => {
         maintValue = data;
         this.loading = false;
-        for (let m of maintValue) {
+        for (const m of maintValue) {
           if (m.id === 904) {
             this.form.patchValue({
               minIndIncome: m.value1
@@ -78,16 +78,20 @@ export class SettingsdialogComponent implements OnInit {
   }
 
   storeData() {
-    let arr: MaintenanceValue[] = [];
+    const arr: MaintenanceValue[] = [];
     const minIndIncomeItem = {} as MaintenanceValue;
     minIndIncomeItem.fileID = 71;
-    minIndIncomeItem.value1 = this.minIndIncome.value;
+    if (this.minIndIncome) {
+      minIndIncomeItem.value1 = this.minIndIncome.value;
+    }
     minIndIncomeItem.id = 904;
     arr.push(minIndIncomeItem);
 
     const minJointIncomeItem = {} as MaintenanceValue;
     minJointIncomeItem.fileID = 71;
-    minJointIncomeItem.value1 = this.minJointIncome.value;
+    if (this.minJointIncome) {
+      minJointIncomeItem.value1 = this.minJointIncome.value;
+    }
     minJointIncomeItem.id = 905;
     arr.push(minJointIncomeItem);
 
@@ -101,6 +105,5 @@ export class SettingsdialogComponent implements OnInit {
       ,      // in case of failure show this message
       () => console.log('Job Done Post !')
     );
-
   }
 }

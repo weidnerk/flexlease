@@ -107,14 +107,11 @@ export class VehiclesettingsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('make ' + this.makeId.value);
-    console.log('model ' + this.modelId.value);
-    console.log('rating ' + this.rating.value.toUpperCase());
 
     if (this.form.valid) {
-      let model = {} as VehicleModel;
-      model.ID = this.modelId.value;
-      model.rating = this.rating.value.toUpperCase();
+      const model = {} as VehicleModel;
+      model.ID = this.modelId!.value;
+      model.rating = this.rating!.value.toUpperCase();
 
       this.dataService.storeValue<VehicleModel>('VehicleModel', model).subscribe(
         data => {

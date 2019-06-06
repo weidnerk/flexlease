@@ -25,7 +25,7 @@ export class MainNavComponent {
   // If 'isHandset$' statement commented out, sidenav never closes
   //
   // Changed 'Breakpoints.Handset' to 'Breakpoints.XSmall' to avoid sidenav closing at 960
-  // See answer here: https://stackoverflow.com/questions/53165736/angular-material-nav-schematics-breakpoint 
+  // See answer here: https://stackoverflow.com/questions/53165736/angular-material-nav-schematics-breakpoint
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.XSmall)
     .pipe(
       map(result => result.matches)
@@ -46,7 +46,7 @@ export class MainNavComponent {
   // click on VERY top left house icon to open and close sidenav
   // if you open it, then stays open
   // if you close it, then opens and closes with mouse entry/exit
-  //isExpanded = true;  // i.e. sidenav opened/closed
+  // isExpanded = true;  // i.e. sidenav opened/closed
 
   // if sidenav is "partially" closed, as soon as you mouse over partically closed sidenave, then set this to true
   // and when you mouse out of the sidenav (partially closed or open), sidenave goes back to partially closed
@@ -57,20 +57,20 @@ export class MainNavComponent {
 
     When startSideOpen = true, include as part of (in main-nav.component.html):
     <mat-sidenav #drawer
-    
+
         [opened]="!(isHandset$ | async)"
 
     so we let the breakpoint handle the display
 
   FULL CODE IS:
-  	<mat-sidenav #drawer 
-		class="sidenav" 
+  	<mat-sidenav #drawer
+		class="sidenav"
 		fixedInViewport="true"
 		[attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
 		[mode]="(isHandset$ | async) ? 'over' : 'side'"
 		[opened]="!(isHandset$ | async)"
     >
-    
+
   */
   startSideOpen = true;
 
