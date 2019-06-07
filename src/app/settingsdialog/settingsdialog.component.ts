@@ -11,18 +11,20 @@ import { MaintenanceValue } from '../_models/MaintenanceValue';
 })
 export class SettingsdialogComponent implements OnInit {
 
+  maintValue = {} as MaintenanceValue[];
   loading = false;
   errorMessage: string;
   form: FormGroup;
   constructor(private fb: FormBuilder,
-              private dialogRef: MatDialogRef<SettingsdialogComponent>,
-              private dataService: DataService) { }
+    private dialogRef: MatDialogRef<SettingsdialogComponent>,
+    private dataService: DataService) { }
 
   ngOnInit() {
     this.buildForm();
   }
   get minIndIncome() { return this.form.get('minIndIncome'); }
   get minJointIncome() { return this.form.get('minJointIncome'); }
+  get acqFee() { return this.form.get('acqFee'); }
 
   buildForm(): void {
 
@@ -32,6 +34,10 @@ export class SettingsdialogComponent implements OnInit {
         updateOn: 'submit'
       }],
       minJointIncome: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      acqFee: [null, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
       }]
@@ -46,23 +52,29 @@ export class SettingsdialogComponent implements OnInit {
   onCancel() {
     this.dialogRef.close();
   }
+  /**
+   * load data
+   */
   loadData() {
-    let maintValue = {} as MaintenanceValue[];
     this.loading = true;
-    const idarray: number[] = [904, 905];
-    this.dataService.getValueArray<MaintenanceValue>('MaintenanceValue', idarray).subscribe(
+    this.dataService.getValues<MaintenanceValue>('MaintenanceValue').subscribe(
       data => {
-        maintValue = data;
+        this.maintValue = data;
         this.loading = false;
-        for (const m of maintValue) {
-          if (m.id === 904) {
+        for (const m of this.maintValue) {
+          if (m.ruleName === 'Min Indv Income') {
             this.form.patchValue({
               minIndIncome: m.value1
             });
           }
-          if (m.id === 905) {
+          if (m.ruleName === 'Min Joint Income') {
             this.form.patchValue({
               minJointIncome: m.value1
+            });
+          }
+          if (m.ruleName === 'Acquisition Fee') {
+            this.form.patchValue({
+              acqFee: m.value1
             });
           }
         }
@@ -77,25 +89,29 @@ export class SettingsdialogComponent implements OnInit {
     );
   }
 
+  /**
+   * Map form values back to maint value array.
+   * case values must match 'Value1' values in tblFileMaint.
+   */
+  loadArrayFromForm() {
+    for (const m of this.maintValue) {
+      switch (m.ruleName) {
+        case 'Min Indv Income':
+          m.value1 = this.minIndIncome!.value;
+          break;
+        case 'Min Joint Income':
+          m.value1 = this.minJointIncome!.value;
+          break;
+          case 'Acquisition Fee':
+            m.value1 = this.acqFee!.value;
+            break;
+        }
+    }
+  }
+
   storeData() {
-    const arr: MaintenanceValue[] = [];
-    const minIndIncomeItem = {} as MaintenanceValue;
-    minIndIncomeItem.fileID = 71;
-    if (this.minIndIncome) {
-      minIndIncomeItem.value1 = this.minIndIncome.value;
-    }
-    minIndIncomeItem.id = 904;
-    arr.push(minIndIncomeItem);
-
-    const minJointIncomeItem = {} as MaintenanceValue;
-    minJointIncomeItem.fileID = 71;
-    if (this.minJointIncome) {
-      minJointIncomeItem.value1 = this.minJointIncome.value;
-    }
-    minJointIncomeItem.id = 905;
-    arr.push(minJointIncomeItem);
-
-    this.dataService.storeValueArray<MaintenanceValue>('MaintenanceValue', arr).subscribe(
+    this.loadArrayFromForm();
+    this.dataService.storeValueArray<MaintenanceValue>('MaintenanceValue', this.maintValue).subscribe(
       data => {
 
       },

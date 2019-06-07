@@ -25,6 +25,7 @@ export class DataService {
     private getModelsUrl: string = environment.API_VEHICLE_ENDPOINT + 'vehiclemodels';
     private getMaintenanceValueUrl: string = environment.API_MAINT_ENDPOINT;
     private getMaintValueArrayUrl: string = environment.API_MAINT_ENDPOINT + 'array';
+    private getMaintValuesUrl: string = environment.API_MAINT_ENDPOINT + 'values';
     private getDealersUrl: string = environment.API_DEALER_ENDPOINT + 'dealers';
     private getDealerUrl: string = environment.API_DEALER_ENDPOINT + 'flexdealer';
 
@@ -185,6 +186,7 @@ export class DataService {
         getListUrlMap.set('VehicleMake', this.getMakesUrl);
         getListUrlMap.set('VehicleModel', this.getModelsUrl);
         getListUrlMap.set('FLEXDealer', this.getDealersUrl);
+        getListUrlMap.set('MaintenanceValue', this.getMaintValuesUrl);
 
         getFromArrayUrlMap.set('MaintenanceValue', this.getMaintValueArrayUrl);
 
