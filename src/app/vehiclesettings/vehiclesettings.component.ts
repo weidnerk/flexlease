@@ -113,7 +113,7 @@ export class VehiclesettingsComponent implements OnInit {
       model.ID = this.modelId!.value;
       model.rating = this.rating!.value.toUpperCase();
 
-      this.dataService.storeValue<VehicleModel>('VehicleModel', model).subscribe(
+      this.dataService.storeObject<VehicleModel>('VehicleModel', model, ['Rating']).subscribe(
         data => {
           this.router.navigate(['/']);
         },
@@ -123,6 +123,7 @@ export class VehiclesettingsComponent implements OnInit {
         ,      // in case of failure show this message
         () => console.log('Job Done Post !')
       );
+
     } else {
       this.errorMessage = 'Form is invalid.';
     }

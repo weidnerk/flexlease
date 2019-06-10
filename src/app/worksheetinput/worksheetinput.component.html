@@ -80,21 +80,14 @@
       </div>
       <div>
         <p>Annual miles elected</p>
-        <mat-slider formControlName="annualMilesElected"
-        [disabled]="disabled"
-        [invert]="invert"
-        [max]="max"
-        [min]="min"
-        [step]="step"
-        [thumbLabel]="thumbLabel"
-        [tickInterval]="tickInterval"
-        [displayWith]="formatLabel"
-        [vertical]="vertical">
-              </mat-slider>
-        </div>
-        <div>
-            <button color="accent" type="submit" color="primary" mat-raised-button>Submit</button>
-        </div>
+        <mat-slider formControlName="annualMilesElected" [disabled]="disabled" [invert]="invert" [max]="max" [min]="min"
+          [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="tickInterval" [displayWith]="formatLabel"
+          [vertical]="vertical">
+        </mat-slider>
+      </div>
+      <div>
+        <button color="accent" type="submit" color="primary" mat-raised-button>Submit</button>
+      </div>
     </div>
   </div>
 </form>

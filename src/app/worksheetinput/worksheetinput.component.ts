@@ -185,17 +185,17 @@ export class WorksheetinputComponent implements OnInit {
        annualMiles: this.annualMilesElected!.value
     };
 
-    this.dataService.storeValue<CustomerApp>('CustomerApp', customerApp).subscribe(
-      data => {
-      },
-      error => {
-        this.loadingVehicle = false;
-        console.log('update lease: ' + error);
-        this.errorMessage = error;
-      }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
-    );
+    // this.dataService.storeValue<CustomerApp>('CustomerApp', customerApp).subscribe(
+    //   data => {
+    //   },
+    //   error => {
+    //     this.loadingVehicle = false;
+    //     console.log('update lease: ' + error);
+    //     this.errorMessage = error;
+    //   }
+    //   ,      // in case of failure show this message
+    //   () => console.log('Job Done Post !')
+    // );
 
     // this.getData();
   }

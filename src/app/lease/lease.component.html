@@ -95,7 +95,17 @@
             {{lease.leaseResult.pmtCalc.value | number : '1.2-2'}}
           </td>
         </tr>
+        <tr>
+          <td>
+            <p>Annual miles elected</p>
+            <mat-slider #annualMilesElected [disabled]="disabled" [invert]="invert" [max]="max"
+              [min]="min" [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="tickInterval"
+              [displayWith]="formatLabel" [vertical]="vertical">
+            </mat-slider>
+          </td>
+        </tr>
       </table>
+      <button mat-button type="button" (click)="onStore()" tabindex="-1">Update</button>
     </div>
   </mat-expansion-panel>
   <mat-expansion-panel>

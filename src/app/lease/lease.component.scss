@@ -1,3 +1,30 @@
 .numericcell {
     text-align: right;
 }
+
+/* These styles taken this link for slider but what do they do? */
+/* from https://stackblitz.com/edit/angular-1bly2u?embed=1&file=app/slider-configurable-example.ts */
+.example-h2 {
+    margin: 10px;
+  }
+  
+.example-section {
+display: flex;
+align-content: center;
+align-items: center;
+height: 60px;
+}
+
+.example-margin {
+margin: 10px;
+}
+
+.mat-slider-horizontal {
+width: 300px;
+}
+
+.mat-slider-vertical {
+height: 300px;
+}
+
+/* End slider styles */

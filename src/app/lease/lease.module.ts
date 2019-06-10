@@ -11,7 +11,9 @@ import { DataService } from '../_services/data.service';
     routing,
     MatFormFieldModule,
     MatExpansionModule,
-    MatInputModule
+    MatInputModule,
+    MatSliderModule,
+    MatButtonModule
   ],
   providers: [DataService]
 })

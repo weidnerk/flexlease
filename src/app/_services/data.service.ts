@@ -30,7 +30,7 @@ export class DataService {
     private getDealerUrl: string = environment.API_DEALER_ENDPOINT + 'flexdealer';
 
     private postMaintenanceValueUrl: string = environment.API_MAINT_ENDPOINT;
-    private postVehicleModelValueUrl: string = environment.API_VEHICLE_ENDPOINT;
+    private postVehicleModelValueUrl: string = environment.API_VEHICLE_ENDPOINT + 'storevalues';
     private postLeaseUrl: string = environment.API_ENDPOINT;
     private postDealerUrl: string = environment.API_DEALER_ENDPOINT;
 
@@ -135,11 +135,33 @@ export class DataService {
         }
     }
 
-    storeValue<T>(typeName: string, value: T) {
-        const url = postUrlMap.get(typeName);
+    // storeValue<T>(typeName: string, value: T) {
+    //     const url = postUrlMap.get(typeName);
+    //     if (!url) {
+    //         return throwError('Url look up failed, keyvalue: \'' + typeName + '\', was not found.');
+    //     }
+    //     const userJson = localStorage.getItem('currentUser');
+    //     if (userJson) {
+    //         const currentUser = JSON.parse(userJson);
+    //         const httpOptions = { headers: new HttpHeaders({ 'API_KEY': this.API_KEY }) };
+    //         return this.http.post<T[]>(url, value, httpOptions).pipe(
+    //             catchError(this.handleError)
+    //         );
+    //     } else {
+    //         return throwError(
+    //             {
+    //                 errMsg: 'could not obtain current user record'
+    //             }
+    //         );
+    //     }
+    // }
+
+    storeObject<T>(typeName: string, value: T, fields: string[]) {
+        let url = postUrlMap.get(typeName);
         if (!url) {
             return throwError('Url look up failed, keyvalue: \'' + typeName + '\', was not found.');
         }
+        url += '?fields=' + JSON.stringify(fields);
         const userJson = localStorage.getItem('currentUser');
         if (userJson) {
             const currentUser = JSON.parse(userJson);
