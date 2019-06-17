@@ -6,7 +6,7 @@
 <!-- don't forget to include FlexLayoutModule -->
 <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
   <div fxLayout="row wrap">
-    <div class="layout-row" *ngFor="let dealer of dealers" fxFlex="20" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100"
+    <div *ngFor="let dealer of dealers" fxFlex="20" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100"
       style="padding: 5px;">
       <!-- cards here -->
       <mat-card class="mat-elevation-z1">
