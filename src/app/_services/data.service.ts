@@ -40,28 +40,11 @@ export class DataService {
         this.SetUrlMappings();
     }
 
-    // Populate the id array with an array of ids to fetch
-    getValueArray<T>(typeName: string, id: number[]): Observable<T[]> {
-        const url = getFromArrayUrlMap.get(typeName);
-        if (!url) {
-            return throwError('Url look up failed, keyvalue: \'' + typeName + '\', was not found.');
-        }
-        const userJson = localStorage.getItem('currentUser');
-        if (userJson) {
-            const currentUser = JSON.parse(userJson);
-            const httpOptions = { headers: new HttpHeaders({ 'API_KEY': this.API_KEY }) };
-            return this.http.post<T[]>(url, id, httpOptions).pipe(
-                catchError(this.handleError)
-            );
-        } else {
-            return throwError(
-                {
-                    errMsg: 'could not obtain current user record'
-                }
-            );
-        }
-    }
-
+    /**
+     * Fetch object from id
+     * @param typeName 
+     * @param id 
+     */
     getValue<T>(typeName: string, id: number): Observable<T> {
         let url = getUrlMap.get(typeName);
         if (!url) {
@@ -84,9 +67,14 @@ export class DataService {
         }
     }
 
-    // Get list of values (such as tblMakes, but tblModels needs makeId)
-    // Optionally pass either an id or a 2D array of a field name and value to search
-    // Don't know how to pass a predicate to the API
+    /**
+     * Get list of values (such as tblMakes, but tblModels needs makeId)
+     * Optionally pass either an id or a 2D array of a field name and value to search
+     * Don't know how to pass a predicate to the API
+     * @param typeName 
+     * @param id 
+     * @param where 
+     */
     getValues<T>(typeName: string, id?: number, where?: string[]): Observable<T[]> {
         let url = getListUrlMap.get(typeName);
         if (!url) {
@@ -114,11 +102,12 @@ export class DataService {
         }
     }
 
-    storeValueArray<T>(typeName: string, arr: T[]) {
-        const url = postFromArrayUrlMap.get(typeName);
+    storeValueArray<T>(typeName: string, arr: T[], fields: string[]) {
+        let url = postFromArrayUrlMap.get(typeName);
         if (!url) {
             return throwError('Url look up failed, keyvalue: \'' + typeName + '\', was not found.');
         }
+        url += '?fields=' + JSON.stringify(fields);
         const userJson = localStorage.getItem('currentUser');
         if (userJson) {
             const currentUser = JSON.parse(userJson);
@@ -135,27 +124,12 @@ export class DataService {
         }
     }
 
-    // storeValue<T>(typeName: string, value: T) {
-    //     const url = postUrlMap.get(typeName);
-    //     if (!url) {
-    //         return throwError('Url look up failed, keyvalue: \'' + typeName + '\', was not found.');
-    //     }
-    //     const userJson = localStorage.getItem('currentUser');
-    //     if (userJson) {
-    //         const currentUser = JSON.parse(userJson);
-    //         const httpOptions = { headers: new HttpHeaders({ 'API_KEY': this.API_KEY }) };
-    //         return this.http.post<T[]>(url, value, httpOptions).pipe(
-    //             catchError(this.handleError)
-    //         );
-    //     } else {
-    //         return throwError(
-    //             {
-    //                 errMsg: 'could not obtain current user record'
-    //             }
-    //         );
-    //     }
-    // }
-
+    /**
+     * Pass object to store with field names to update
+     * @param typeName  - string name of type to do URL lookup
+     * @param value     - actual object
+     * @param fields    - array of fields to update
+     */
     storeObject<T>(typeName: string, value: T, fields: string[]) {
         let url = postUrlMap.get(typeName);
         if (!url) {

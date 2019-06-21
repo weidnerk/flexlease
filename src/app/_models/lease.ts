@@ -24,22 +24,23 @@ export interface CustomerAppVehicle {
 export interface LeaseResult {
     grossCapCost: GrossCapCost;
     adjCapCost: AdjCapCost;
-    residualCalc: ResidualCalculation;
+    residualCalculation: ResidualCalculation;
     pmtCalc: PmtCalc;
     bookCalculation: BookCalc;
     annualMilesChargeCalc: AdditionalMilesChargeCalculation;
 }
 export interface ResidualCalculation {
-    value: number;
     pct: number;
     pctDeduct: number;
-    calc: number;
     carRating: string;
+    bookValue: number;
+    value: number;
 }
 export interface GrossCapCost {
     salePrice: number;
-    value: number;
     dealerDocFee: number;
+    tag: number;
+    value: number;
 }
 export interface AdjCapCost {
     value: number;
@@ -61,8 +62,11 @@ export interface BookCalc {
     value: number;
     icoValue: number;
 }
-export interface AdditionalMilesChargeCalculation
-{
+export interface AdditionalMilesChargeCalculation {
     value: number;
     annualIncrease: number;
+}
+export interface LeaseResidual {
+    months: number;
+    pct: number;
 }

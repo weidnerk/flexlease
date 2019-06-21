@@ -15,4 +15,5 @@ export interface VehicleModel {
     rating: string;
     makeId: number;
     makeEntity: VehicleMake;
+    year: number;
 }

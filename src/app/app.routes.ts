@@ -2,6 +2,7 @@ import {Routes} from '@angular/router';
 import { AuthGuard } from './_guards/index';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { LeaseResidualsComponent } from './leaseresiduals/leaseresiduals.component';
 
 export const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'worksheet/:appid', loadChildren: () => import('./worksheet/worksheet.module').then(m => m.WorksheetModule), canActivate: [AuthGuard] },
   { path: 'settings', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule), canActivate: [AuthGuard] },
   { path: 'lease/:appid', loadChildren: () => import('./lease/lease.module').then(m => m.LeaseModule), canActivate: [AuthGuard] },
+  { path: 'leaseresiduals', component: LeaseResidualsComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/', pathMatch: 'full' }
 ];
 

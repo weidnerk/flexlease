@@ -24,6 +24,12 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
   vehicleLoaded = false;
   ame: number;
 
+  residualValueKeys: string[] = [];
+  residualValueValues: string[] = [];
+
+  adjCapCostKeys: string[] = [];
+  adjCapCostValues: string[] = [];
+
   // 'Annual miles elected' slider settings
   autoTicks = false;
   disabled = false;
@@ -65,10 +71,7 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.lease = data;
         this.loading = false;
         this.loaded = true;
-        // if (this.annualMiles) {
-        //   this.annualMiles.value = this.lease.customerApp.annualMiles;
-        //   this.annualMiles.value = 17000;
-        // }
+
         setTimeout(() => {
           this.annualMiles.value = this.lease.customerApp.annualMiles;
         }, 1);

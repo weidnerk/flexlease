@@ -1,3 +1,4 @@
+<span style="color:red">{{ errorMessage }}</span>
 <mat-accordion [multi]="true">
   <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
@@ -17,34 +18,10 @@
       <table>
         <tr>
           <td>
-            ICO
-          </td>
-          <td class="numericcell">
-            {{lease.leaseResult.bookCalc.icoValue | number : '1.2-2'}}
-          </td>
-        </tr>
-        <tr>
-          <td>
             Book Value
           </td>
           <td class="numericcell">
             {{lease.leaseResult.bookCalc.value | number : '1.2-2'}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Sale Price
-          </td>
-          <td class="numericcell">
-            {{lease.leaseResult.grossCapCost.salePrice | number : '1.2-2'}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Dealer Doc Fee
-          </td>
-          <td class="numericcell">
-            {{lease.leaseResult.grossCapCost.dealerDocFee | number : '1.2-2'}}
           </td>
         </tr>
         <tr>
@@ -61,22 +38,6 @@
           </td>
           <td class="numericcell">
             {{lease.leaseResult.adjCapCost.value | number : '1.2-2'}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Car Rating
-          </td>
-          <td class="numericcell">
-            {{lease.leaseResult.residualCalculation.carRating}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Additional Miles Charge
-          </td>
-          <td class="numericcell">
-            {{lease.leaseResult.annualMilesChargeCalc.value | number : '1.2-2'}}
           </td>
         </tr>
         <tr>
@@ -98,9 +59,9 @@
         <tr>
           <td>
             <p>Annual miles elected</p>
-            <mat-slider #annualMilesElected [disabled]="disabled" [invert]="invert" [max]="max"
-              [min]="min" [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="tickInterval"
-              [displayWith]="formatLabel" [vertical]="vertical">
+            <mat-slider #annualMilesElected [disabled]="disabled" [invert]="invert" [max]="max" [min]="min"
+              [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="tickInterval" [displayWith]="formatLabel"
+              [vertical]="vertical">
             </mat-slider>
           </td>
         </tr>
@@ -111,7 +72,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Applicant
+        <mat-icon>account_circle</mat-icon>Applicant
       </mat-panel-title>
       <mat-panel-description>
         Applicant Details
@@ -141,7 +102,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Vehicle
+        <mat-icon>directions_car</mat-icon>Vehicle
       </mat-panel-title>
       <mat-panel-description>
         Vehicle Details
@@ -152,7 +113,7 @@
         <tr>
           <td></td>
           <td class="numericcell">
-            {{vehicle.make}} {{vehicle.model}}
+            {{vehicle.year}} {{vehicle.make}} {{vehicle.model}}
           </td>
         </tr>
         <tr>
@@ -172,6 +133,58 @@
           </td>
         </tr>
       </table>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>looks_one</mat-icon>Gross Cap Cost
+      </mat-panel-title>
+      <mat-panel-description>
+        Details
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="loaded">
+      <app-objectprint [object]="lease.leaseResult.grossCapCost"></app-objectprint>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>looks_two</mat-icon>Residual Value
+      </mat-panel-title>
+      <mat-panel-description>
+        Details
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="loaded">
+      <app-objectprint [object]="lease.leaseResult.residualCalculation"></app-objectprint>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>looks_3</mat-icon>Adjusted Cap Cost
+      </mat-panel-title>
+      <mat-panel-description>
+        Details
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="loaded">
+      <app-objectprint [object]="lease.leaseResult.adjCapCost"></app-objectprint>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>attach_money</mat-icon>Payment Calculation
+      </mat-panel-title>
+      <mat-panel-description>
+        Details
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="loaded">
+      <app-objectprint [object]="lease.leaseResult.pmtCalc"></app-objectprint>
     </div>
   </mat-expansion-panel>
 </mat-accordion>

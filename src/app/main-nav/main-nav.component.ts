@@ -18,7 +18,8 @@ export class MainNavComponent {
     { path: 'settings', name: 'Settings', icon: 'settings' },
     { path: 'vehiclesettings', name: 'Vehicle Settings', icon: 'settings_applications' },
     { path: 'dealers', name: 'Franchise Dealers', icon: 'people' },
-    { path: 'worksheet', name: 'Worksheet', icon: 'graphic_eq' }
+    { path: 'worksheet', name: 'Worksheet', icon: 'graphic_eq' },
+    { path: 'leaseresiduals', name: 'Lease Residuals', icon: 'graphic_eq' }
   ];
 
 

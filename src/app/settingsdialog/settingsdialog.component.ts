@@ -11,7 +11,7 @@ import { MaintenanceValue } from '../_models/MaintenanceValue';
 })
 export class SettingsdialogComponent implements OnInit {
 
-  maintValue = {} as MaintenanceValue[];
+  maintValues = {} as MaintenanceValue[];
   loading = false;
   errorMessage: string;
   form: FormGroup;
@@ -59,9 +59,9 @@ export class SettingsdialogComponent implements OnInit {
     this.loading = true;
     this.dataService.getValues<MaintenanceValue>('MaintenanceValue').subscribe(
       data => {
-        this.maintValue = data;
+        this.maintValues = data;
         this.loading = false;
-        for (const m of this.maintValue) {
+        for (const m of this.maintValues) {
           if (m.ruleName === 'Min Indv Income') {
             this.form.patchValue({
               minIndIncome: m.value1
@@ -94,7 +94,7 @@ export class SettingsdialogComponent implements OnInit {
    * case values must match 'Value1' values in tblFileMaint.
    */
   loadArrayFromForm() {
-    for (const m of this.maintValue) {
+    for (const m of this.maintValues) {
       switch (m.ruleName) {
         case 'Min Indv Income':
           m.value1 = this.minIndIncome!.value;
@@ -102,16 +102,16 @@ export class SettingsdialogComponent implements OnInit {
         case 'Min Joint Income':
           m.value1 = this.minJointIncome!.value;
           break;
-          case 'Acquisition Fee':
-            m.value1 = this.acqFee!.value;
-            break;
-        }
+        case 'Acquisition Fee':
+          m.value1 = this.acqFee!.value;
+          break;
+      }
     }
   }
 
   storeData() {
     this.loadArrayFromForm();
-    this.dataService.storeValueArray<MaintenanceValue>('MaintenanceValue', this.maintValue).subscribe(
+    this.dataService.storeValueArray<MaintenanceValue>('MaintenanceValue', this.maintValues, ['Value1']).subscribe(
       data => {
 
       },

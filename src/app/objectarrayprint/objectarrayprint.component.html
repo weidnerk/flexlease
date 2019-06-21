@@ -1,0 +1,10 @@
+<table *ngIf="object">
+  <tr *ngFor="let v of keys; index as i">
+    <td>
+      {{keys[i]}}
+    </td>
+    <td class="numericcell">
+        <span [ngClass]="{mainvalue: keys[i]==='value'}">{{isNumber(values[i]) ? (values[i] | number : '1.2-2') : (values[i]) }}</span>
+      </td>
+    </tr>
+</table>
