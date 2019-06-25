@@ -5,6 +5,7 @@ import { routing } from './leases.routes';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule, MatCardModule } from '@angular/material';
 import { DataService } from '../_services/data.service';
+
 @NgModule({
   declarations: [LeasesComponent],
   imports: [

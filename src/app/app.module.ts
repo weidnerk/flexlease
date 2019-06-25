@@ -16,8 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './_services/index';
 import { AuthGuard } from './_guards/index';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ObjectarrayprintComponent } from './objectarrayprint/objectarrayprint.component';
-import { LeaseResidualsComponent } from './leaseresiduals/leaseresiduals.component';
+
 
 @NgModule({
   declarations: [
@@ -25,9 +24,7 @@ import { LeaseResidualsComponent } from './leaseresiduals/leaseresiduals.compone
     MainNavComponent,
     OneComponent,
     LoginComponent,
-    DashboardComponent,
-    ObjectarrayprintComponent,
-    LeaseResidualsComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

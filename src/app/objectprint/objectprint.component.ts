@@ -1,3 +1,6 @@
+/**
+ * Print an object.  2 column format - fields in one column, values in the second column.
+ */
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({

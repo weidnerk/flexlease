@@ -5,5 +5,7 @@ export interface FLEXDealer {
     state: string;
     cmsCompanyId: number;
     serviceFee: number;
+    saleTaxPer: number;
+    cntyTaxPer: number;
 }
 

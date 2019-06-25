@@ -5,12 +5,11 @@ import { LeaseComponent } from './lease.component';
 import { MatButtonModule, MatListModule, MatCardModule, MatInputModule, MatIconModule, MatSliderModule, MatFormFieldModule, MatExpansionModule } from '@angular/material';
 import { DataService } from '../_services/data.service';
 import { ObjectprintComponent } from '../objectprint/objectprint.component';
-import { FieldnameprintPipe } from '../_pipes/fieldnameprint.pipe';
+import { MainPipe } from '../_pipes/main-pipe.module';
 
 @NgModule({
-  declarations: [LeaseComponent, 
-    ObjectprintComponent,
-    FieldnameprintPipe],
+  declarations: [LeaseComponent,
+    ObjectprintComponent],
   imports: [
     CommonModule,
     routing,
@@ -19,7 +18,8 @@ import { FieldnameprintPipe } from '../_pipes/fieldnameprint.pipe';
     MatInputModule,
     MatSliderModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MainPipe
   ],
   providers: [DataService]
 })

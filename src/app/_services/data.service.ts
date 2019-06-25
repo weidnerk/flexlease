@@ -28,6 +28,9 @@ export class DataService {
     private getMaintValuesUrl: string = environment.API_MAINT_ENDPOINT + 'values';
     private getDealersUrl: string = environment.API_DEALER_ENDPOINT + 'dealers';
     private getDealerUrl: string = environment.API_DEALER_ENDPOINT + 'flexdealer';
+    private getLeaseResidualsArrayUrl: string = environment.API_ENDPOINT + 'leaseresiduals';
+    private getCarRatingDeductsArrayUrl: string = environment.API_ENDPOINT + 'carratingdeducts';
+    private getDealerProfileArrayUrl: string = environment.API_ENDPOINT + 'dealerprofile';
 
     private postMaintenanceValueUrl: string = environment.API_MAINT_ENDPOINT;
     private postVehicleModelValueUrl: string = environment.API_VEHICLE_ENDPOINT + 'storevalues';
@@ -70,7 +73,7 @@ export class DataService {
     /**
      * Get list of values (such as tblMakes, but tblModels needs makeId)
      * Optionally pass either an id or a 2D array of a field name and value to search
-     * Don't know how to pass a predicate to the API
+     * How to pass a predicate to the API?
      * @param typeName 
      * @param id 
      * @param where 
@@ -183,8 +186,11 @@ export class DataService {
         getListUrlMap.set('VehicleModel', this.getModelsUrl);
         getListUrlMap.set('FLEXDealer', this.getDealersUrl);
         getListUrlMap.set('MaintenanceValue', this.getMaintValuesUrl);
+        getListUrlMap.set('LeaseResidual', this.getLeaseResidualsArrayUrl);
+        getListUrlMap.set('CarRatingDeduct', this.getCarRatingDeductsArrayUrl);
+        getListUrlMap.set('DealerProfile', this.getDealerProfileArrayUrl);
 
-        getFromArrayUrlMap.set('MaintenanceValue', this.getMaintValueArrayUrl);
+        // getFromArrayUrlMap.set('MaintenanceValue', this.getMaintValueArrayUrl);
 
         postUrlMap.set('VehicleModel', this.postVehicleModelValueUrl);
         postUrlMap.set('CustomerApp', this.postLeaseUrl);

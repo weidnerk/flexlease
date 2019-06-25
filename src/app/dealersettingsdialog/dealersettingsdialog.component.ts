@@ -18,6 +18,8 @@ export class DealersettingsdialogComponent implements OnInit {
 
   get cmsid() { return this.form.get('cmsid'); }
   get dealerDocFee() { return this.form.get('dealerDocFee'); }
+  get stateTaxRate() { return this.form.get('stateTaxRate'); }
+  get countyTaxRate() { return this.form.get('countyTaxRate'); }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private dataService: DataService,
@@ -41,7 +43,9 @@ export class DealersettingsdialogComponent implements OnInit {
         console.log('dba: ' + this.dealer.dba);
         this.form.patchValue({
           dealerDocFee: this.dealer.serviceFee,
-          cmsid: this.dealer.cmsCompanyId
+          cmsid: this.dealer.cmsCompanyId,
+          stateTaxRate: this.dealer.saleTaxPer,
+          countyTaxRate: this.dealer.cntyTaxPer
         });
 
       },
@@ -65,6 +69,14 @@ export class DealersettingsdialogComponent implements OnInit {
       dealerDocFee: [null, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
+      }],
+      stateTaxRate: [null, {
+        validators: [Validators.required, Validators.minLength(1)],
+        updateOn: 'submit'
+      }],
+      countyTaxRate: [null, {
+        validators: [Validators.required, Validators.minLength(1)],
+        updateOn: 'submit'
       }]
     });
   }
@@ -77,8 +89,10 @@ export class DealersettingsdialogComponent implements OnInit {
       dealer.id = this.dealer.id;
       dealer.cmsCompanyId = this.cmsid!.value;
       dealer.serviceFee = this.dealerDocFee!.value;
+      dealer.saleTaxPer = this.stateTaxRate!.value;
+      dealer.cntyTaxPer = this.countyTaxRate!.value;
 
-      this.dataService.storeObject<FLEXDealer>('FLEXDealer', dealer, ['ServiceFee']).subscribe(
+      this.dataService.storeObject<FLEXDealer>('FLEXDealer', dealer, ['ServiceFee', 'SaleTaxPer', 'CntyTaxPer']).subscribe(
         data => {
           this.dialogRef.close();
         },

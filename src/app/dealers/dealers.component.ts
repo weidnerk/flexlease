@@ -45,7 +45,7 @@ export class DealersComponent implements OnInit {
     console.log(cmsid);
 
     const dialogRef = this.dialog.open(DealersettingsdialogComponent, {
-      height: '400px',
+      height: '500px',
       width: '300px',
       data: { dealerid: cmsid }
     });

@@ -1,0 +1,29 @@
+<mat-tab-group>
+  <div *ngIf='residualsLoading'>
+    <mat-spinner mode="indeterminate"></mat-spinner>
+    <b>Loading...</b>
+  </div>
+  <mat-tab label="Lease Residuals">
+    <div *ngIf="residualsLoaded">
+      <app-objectarrayprint [object]="residuals"></app-objectarrayprint>
+    </div>
+  </mat-tab>
+  <mat-tab label="Car Ratings Deduct">
+    <div *ngIf='carRatingDeductsLoading'>
+      <mat-spinner mode="indeterminate"></mat-spinner>
+      <b>Loading...</b>
+    </div>
+    <div *ngIf="carRatingDeductsLoaded">
+      <app-objectarrayprint [object]="carRatingDeducts"></app-objectarrayprint>
+    </div>
+  </mat-tab>
+  <mat-tab label="Dealer Profile">
+    <div *ngIf='dealerProfileLoading'>
+      <mat-spinner mode="indeterminate"></mat-spinner>
+      <b>Loading...</b>
+    </div>
+    <div *ngIf="dealerProfileLoaded">
+      <app-objectarrayprint [object]="dealerProfiles"></app-objectarrayprint>
+    </div>
+  </mat-tab>
+</mat-tab-group>

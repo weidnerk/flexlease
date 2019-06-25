@@ -187,4 +187,30 @@
       <app-objectprint [object]="lease.leaseResult.pmtCalc"></app-objectprint>
     </div>
   </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>money_off</mat-icon>Taxes Due
+      </mat-panel-title>
+      <mat-panel-description>
+        Details
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="loaded">
+      <app-objectprint [object]="lease.leaseResult.taxesDue"></app-objectprint>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>money_off</mat-icon>Reserve To Dealer
+      </mat-panel-title>
+      <mat-panel-description>
+        Details
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div *ngIf="loaded">
+      <app-objectprint [object]="lease.leaseResult.reserveToDealer"></app-objectprint>
+    </div>
+  </mat-expansion-panel>
 </mat-accordion>

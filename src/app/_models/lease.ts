@@ -28,12 +28,15 @@ export interface LeaseResult {
     pmtCalc: PmtCalc;
     bookCalculation: BookCalc;
     annualMilesChargeCalc: AdditionalMilesChargeCalculation;
+    taxesDue: TaxesDue;
+    reserveToDealer: ReserveToDealer;
 }
 export interface ResidualCalculation {
     pct: number;
     pctDeduct: number;
     carRating: string;
     bookValue: number;
+    residualDeduct: number;
     value: number;
 }
 export interface GrossCapCost {
@@ -43,8 +46,8 @@ export interface GrossCapCost {
     value: number;
 }
 export interface AdjCapCost {
-    value: number;
     capCostReduction: number;
+    value: number;
 }
 export interface PmtCalc {
      adjustedCapitalizedCost: number;
@@ -67,6 +70,32 @@ export interface AdditionalMilesChargeCalculation {
     annualIncrease: number;
 }
 export interface LeaseResidual {
-    months: number;
-    pct: number;
+    month: number;
+    percent: number;
+}
+export interface CarRatingDeduct {
+    rating: string;
+    percent: number;
+}
+export interface TaxesDue {
+    capCostReduction: number;
+    stateTaxRate: number;
+    stateTax: number;
+    countyTaxRate: number;
+    countyTax: number;
+    value: number;
+}
+export interface ReserveToDealer {
+    customerMonthlyRent: number;
+    buyFeeDifference: number;
+    totalReserveOverTerm: number;
+    pctSplitPaid: number;
+    value: number;
+}
+export interface DealerProfile
+{
+    yearModel: string;
+    dlrBuyFactor: number;
+    // maxSellFactor: number;
+    // regularTerm: number;
 }
