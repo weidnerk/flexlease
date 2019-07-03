@@ -29,7 +29,6 @@ export class DataService {
     private getDealersUrl: string = environment.API_DEALER_ENDPOINT + 'dealers';
     private getDealerUrl: string = environment.API_DEALER_ENDPOINT + 'flexdealer';
     private getLeaseResidualsArrayUrl: string = environment.API_ENDPOINT + 'leaseresiduals';
-    private getCarRatingDeductsArrayUrl: string = environment.API_ENDPOINT + 'carratingdeducts';
     private getDealerProfileArrayUrl: string = environment.API_ENDPOINT + 'dealerprofile';
 
     private postMaintenanceValueUrl: string = environment.API_MAINT_ENDPOINT;
@@ -187,7 +186,6 @@ export class DataService {
         getListUrlMap.set('FLEXDealer', this.getDealersUrl);
         getListUrlMap.set('MaintenanceValue', this.getMaintValuesUrl);
         getListUrlMap.set('LeaseResidual', this.getLeaseResidualsArrayUrl);
-        getListUrlMap.set('CarRatingDeduct', this.getCarRatingDeductsArrayUrl);
         getListUrlMap.set('DealerProfile', this.getDealerProfileArrayUrl);
 
         // getFromArrayUrlMap.set('MaintenanceValue', this.getMaintValueArrayUrl);

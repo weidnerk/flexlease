@@ -1,0 +1,10 @@
+<div *ngIf='loading'>
+    <mat-spinner mode="indeterminate"></mat-spinner>
+    <b>Loading...</b>
+</div>
+
+<div *ngFor="let lease of leases" style="padding: 15px;float:left;">
+    <h3>{{lease.lastName}}, {{lease.firstName}}</h3>
+    {{lease.dealerName}}<br />
+    App ID: <a [routerLink]="['/lease', lease.lenderAppId]">{{lease.lenderAppId}}</a>
+</div>

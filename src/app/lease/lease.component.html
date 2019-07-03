@@ -1,20 +1,13 @@
 <span style="color:red">{{ errorMessage }}</span>
-<mat-accordion [multi]="true">
-  <mat-expansion-panel [expanded]="true">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        Lease Terms
-      </mat-panel-title>
-      <mat-panel-description>
-        Derived Deal
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+<mat-tab-group>
+  <mat-tab label="Lease">
     <span *ngIf="loading">
       <img
         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </span>
 
-    <div *ngIf="loaded">
+    <form [formGroup]="form" *ngIf="loaded" class="tabpadding" (ngSubmit)="onStore()" novalidate>
+      <h4>{{lease.customerApp.firstName}} {{lease.customerApp.lastName}}</h4>
       <table>
         <tr>
           <td>
@@ -39,6 +32,9 @@
           <td class="numericcell">
             {{lease.leaseResult.adjCapCost.value | number : '1.2-2'}}
           </td>
+          <td>
+            <span class="limiter">{{lease.leaseResult.adjCapCost.message}}</span>
+          </td>
         </tr>
         <tr>
           <td>
@@ -46,6 +42,19 @@
           </td>
           <td class="numericcell">
             {{lease.leaseResult.residualCalculation.value | number : '1.2-2'}}
+          </td>
+        </tr>
+        <tr><td span="2">&nbsp;</td></tr>
+        <tr>
+          <td>
+            <mat-form-field appearance="outline" class="outlinepadding">
+              <mat-label>Cash down</mat-label>
+              <input matInput formControlName="cashDown" placeholder="Cash down" maxlength="8"
+                class="matinput">
+            </mat-form-field>&nbsp;
+          </td>
+          <td>
+            <span class="limiter">{{lease.leaseResult.minCashDown.message}}</span>
           </td>
         </tr>
         <tr>
@@ -59,158 +68,294 @@
         <tr>
           <td>
             <p>Annual miles elected</p>
-            <mat-slider #annualMilesElected [disabled]="disabled" [invert]="invert" [max]="max" [min]="min"
-              [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="tickInterval" [displayWith]="formatLabel"
-              [vertical]="vertical">
+            <mat-slider formControlName="annualMiles" [disabled]="disabled" [invert]="invert" [max]="max" [min]="min"
+              [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="tick" [displayWith]="formatLabel"
+              [vertical]="vertical" (change)="onAnnualMilesChange($event)">
             </mat-slider>
           </td>
         </tr>
       </table>
-      <button mat-button type="button" (click)="onStore()" tabindex="-1">Update</button>
+      <button mat-button type="submit" tabindex="-1">Update</button>
+      <button mat-button (click)="onShowDetail(); $event.preventDefault()">{{showDetailLabel}}</button>
+      <div [ngClass]="showDetail ? 'show' : 'hide'">
+        <button mat-button (click)="accordion.openAll()">Expand All </button>
+        <button mat-button (click)="accordion.closeAll()">Collapse All </button>
+        <mat-accordion #accordion="matAccordion" [multi]="true">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>account_circle</mat-icon>Applicant
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <table>
+                <tr>
+                  <td>
+                    First name:
+                  </td>
+                  <td class="numericcell">
+                    {{lease.customerApp.firstName}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Last name:
+                  </td>
+                  <td class="numericcell">
+                    {{lease.customerApp.lastName}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>directions_car</mat-icon>Vehicle
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="vehicleLoaded">
+              <table>
+                <tr>
+                  <td></td>
+                  <td class="numericcell">
+                    {{vehicle.year}} {{vehicle.make}} {{vehicle.model}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    VIN:
+                  </td>
+                  <td class="numericcell">
+                    {{vehicle.vin}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Miles:
+                  </td>
+                  <td class="numericcell">
+                    {{vehicle.miles}}
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>book</mat-icon>Retail Book Value
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.bookCalc"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>looks_one</mat-icon>Sale Price
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.salePrice"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>looks_one</mat-icon>Gross Cap Cost
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.grossCapCost"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>looks_two</mat-icon>Residual Value
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.residualCalculation"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>looks_3</mat-icon>Adjusted Cap Cost
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.adjCapCost"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>attach_money</mat-icon>Payment Calculation
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.pmtCalc"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Taxes Due
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.taxesDue"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Reserve To Dealer
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.reserveToDealer"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Collect From Lessee
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.collectFromLessee"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Amount Due Dealer
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.amountDueDealer"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Discount Percent
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.discountPercent"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Min Discount
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.minDiscount"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Target Lease Cap
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.targetLeaseCap"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Over Target Fin Disc
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.overTargetFinDisc"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Discount
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.leaseDiscount"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Adj Cap Cost Limit
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.adjCapCostLimit"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon>money_off</mat-icon>Min Cash Down
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
+              <app-objectprint [object]="lease.leaseResult.minCashDown"></app-objectprint>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </form>
+  </mat-tab>
+  <mat-tab label="Dealer Sale Net Profit">
+    <div *ngIf="loaded" class="tabpadding">
+      <app-objectprint [object]="lease.leaseResult.dealerSaleNetProfit"></app-objectprint>
     </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>account_circle</mat-icon>Applicant
-      </mat-panel-title>
-      <mat-panel-description>
-        Applicant Details
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div *ngIf="loaded">
-      <table>
-        <tr>
-          <td>
-            First name:
-          </td>
-          <td class="numericcell">
-            {{lease.customerApp.firstName}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Last name:
-          </td>
-          <td class="numericcell">
-            {{lease.customerApp.lastName}}
-          </td>
-        </tr>
-      </table>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>directions_car</mat-icon>Vehicle
-      </mat-panel-title>
-      <mat-panel-description>
-        Vehicle Details
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div *ngIf="vehicleLoaded">
-      <table>
-        <tr>
-          <td></td>
-          <td class="numericcell">
-            {{vehicle.year}} {{vehicle.make}} {{vehicle.model}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            VIN:
-          </td>
-          <td class="numericcell">
-            {{vehicle.vin}}
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Miles:
-          </td>
-          <td class="numericcell">
-            {{vehicle.miles}}
-          </td>
-        </tr>
-      </table>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>looks_one</mat-icon>Gross Cap Cost
-      </mat-panel-title>
-      <mat-panel-description>
-        Details
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div *ngIf="loaded">
-      <app-objectprint [object]="lease.leaseResult.grossCapCost"></app-objectprint>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>looks_two</mat-icon>Residual Value
-      </mat-panel-title>
-      <mat-panel-description>
-        Details
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div *ngIf="loaded">
-      <app-objectprint [object]="lease.leaseResult.residualCalculation"></app-objectprint>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>looks_3</mat-icon>Adjusted Cap Cost
-      </mat-panel-title>
-      <mat-panel-description>
-        Details
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div *ngIf="loaded">
-      <app-objectprint [object]="lease.leaseResult.adjCapCost"></app-objectprint>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>attach_money</mat-icon>Payment Calculation
-      </mat-panel-title>
-      <mat-panel-description>
-        Details
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div *ngIf="loaded">
-      <app-objectprint [object]="lease.leaseResult.pmtCalc"></app-objectprint>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>money_off</mat-icon>Taxes Due
-      </mat-panel-title>
-      <mat-panel-description>
-        Details
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div *ngIf="loaded">
-      <app-objectprint [object]="lease.leaseResult.taxesDue"></app-objectprint>
-    </div>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon>money_off</mat-icon>Reserve To Dealer
-      </mat-panel-title>
-      <mat-panel-description>
-        Details
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <div *ngIf="loaded">
-      <app-objectprint [object]="lease.leaseResult.reserveToDealer"></app-objectprint>
-    </div>
-  </mat-expansion-panel>
-</mat-accordion>
+  </mat-tab>
+</mat-tab-group>

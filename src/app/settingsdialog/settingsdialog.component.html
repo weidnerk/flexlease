@@ -1,24 +1,100 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div>
-      <mat-form-field appearance="outline" class="outlinepadding">
-        <mat-label>Min ind income</mat-label>
-        <input matInput formControlName="minIndIncome" placeholder="Min ind income" maxlength="8" class="matinput">
-      </mat-form-field>&nbsp;
-    </div>
-    <div>
-      <mat-form-field appearance="outline" class="outlinepadding">
-        <mat-label>Min joint income</mat-label>
-        <input matInput formControlName="minJointIncome" placeholder="Min joint income" maxlength="8" class="matinput">
-      </mat-form-field>&nbsp;
-    </div>
-    <div>
-      <mat-form-field appearance="outline" class="outlinepadding">
-        <mat-label>Acquistion Fee</mat-label>
-        <input matInput formControlName="acqFee" placeholder="Min joint income" maxlength="8" class="matinput">
-      </mat-form-field>&nbsp;
-    </div>
-    <div mat-dialog-actions>
-      <button color="accent" type="submit" color="primary" mat-raised-button>Save</button>
-      <button mat-button type="button" (click)="onCancel()" tabindex="-1">Cancel</button>
-    </div>
+  <mat-tab-group>
+    <mat-tab label="Global">
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Acquistion Fee</mat-label>
+          <input matInput formControlName="acqFee" placeholder="Min joint income" maxlength="8" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Max Markup %</mat-label>
+          <input matInput formControlName="maxMarkupPct" placeholder="Max Markup %" maxlength="8" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Max Markup 1</mat-label>
+          <input matInput formControlName="maxMarkup1" placeholder="Max Markup 1" maxlength="8" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Max Markup 2</mat-label>
+          <input matInput formControlName="maxMarkup2" placeholder="Max Markup 2" maxlength="8" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Year Residual Impactor</mat-label>
+          <input matInput formControlName="yearResidualImpactor" placeholder="Year Residual Impactor" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Lease Contract Rate</mat-label>
+          <input matInput formControlName="leaseContractRate" placeholder="Lease Contract Rate" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Standard Lease Term</mat-label>
+          <input matInput formControlName="standardLeaseTerm" placeholder="Standard Lease Term" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+    </mat-tab>
+    <mat-tab label="Applicant">
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Min ind income</mat-label>
+          <input matInput formControlName="minIndIncome" placeholder="Min ind income" maxlength="8" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Min joint income</mat-label>
+          <input matInput formControlName="minJointIncome" placeholder="Min joint income" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+    </mat-tab>
+    <mat-tab label="Cash Down">
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Min Cash Down</mat-label>
+          <input matInput formControlName="minCashDown" placeholder="Min Cash Down" maxlength="8" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Min Cash Down %</mat-label>
+          <input matInput formControlName="minCashDownPct" placeholder="Min Cash Down %" maxlength="8" class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+    </mat-tab>
+    <mat-tab label="Car Rating">
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>B Rating % Offset</mat-label>
+          <input matInput formControlName="bRatingPctOffset" placeholder="B Rating % Offset" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>C Rating % Offset</mat-label>
+          <input matInput formControlName="cRatingPctOffset" placeholder="C Rating % Offset" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <div mat-dialog-actions>
+    <button color="accent" type="submit" color="primary" mat-raised-button>Save</button>
+    <button mat-button type="button" (click)="onCancel()" tabindex="-1">Cancel</button>
+  </div>
 </form>

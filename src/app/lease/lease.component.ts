@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Lease, Vehicle, CustomerApp } from '../_models';
 import { DataService } from '../_services/data.service';
-import { MatAccordion, MatExpansionPanel, MatSlider } from '@angular/material';
+import { MatAccordion, MatExpansionPanel, MatSlider, MatSliderChange } from '@angular/material';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-lease',
@@ -11,7 +12,6 @@ import { MatAccordion, MatExpansionPanel, MatSlider } from '@angular/material';
   styleUrls: ['./lease.component.scss']
 })
 export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
-  @ViewChild('annualMilesElected', { static: false }) annualMiles: MatSlider;
 
   errorMessage: string;
   loading = false;
@@ -23,6 +23,10 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
   vehicle: Vehicle;
   vehicleLoaded = false;
   ame: number;
+  showDetail = false;
+  showDetailLabel = 'Show Detail';
+  form: FormGroup;
+  annualMiles: number;
 
   residualValueKeys: string[] = [];
   residualValueValues: string[] = [];
@@ -41,13 +45,18 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
   thumbLabel = true;
   value = 0;
   vertical = false;
-  _tickInterval = 1;
+  tick = 1;
   // End slider settings
 
   constructor(private activatedroute: ActivatedRoute,
-    private dataService: DataService) { }
+              private dataService: DataService,
+              private fb: FormBuilder) { }
+
+  get annualMilesForm() { return this.form.get('annualMiles'); }
+  get cashDown() { return this.form.get('cashDown'); }
 
   ngOnInit() {
+    this.buildForm();
     this.paramsSubscription = this.activatedroute.params.subscribe(params => {
       this.appid = params.appid;
       this.getLease();
@@ -71,10 +80,10 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
         this.lease = data;
         this.loading = false;
         this.loaded = true;
-
-        setTimeout(() => {
-          this.annualMiles.value = this.lease.customerApp.annualMiles;
-        }, 1);
+        this.form.patchValue({
+          cashDown: this.lease.customerApp.cashDown,
+          annualMiles: this.lease.customerApp.annualMiles
+        });
       },
       error => {
         this.loading = false;
@@ -103,16 +112,17 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
   onStore() {
-
     const app = {} as CustomerApp;
     app.lenderAppId = this.appid;
-    if (this.annualMiles.value) {
-      app.annualMiles = this.annualMiles.value;
-    }
 
-    this.dataService.storeObject<CustomerApp>('CustomerApp', app, ['AnnualMiles']).subscribe(
+    app.annualMiles = this.annualMilesForm!.value;   
+    // app.annualMiles = this.annualMiles; // used with onAnnualMilesChange
+    app.cashDown = this.cashDown!.value;
+
+    this.dataService.storeObject<CustomerApp>('CustomerApp', app, ['AnnualMiles', 'CashDown']).subscribe(
       data => {
         this.errorMessage = 'Record has been stored.';
+        this.getLease();
       },
       error => {
         console.log('storeDealer: ' + error);
@@ -136,9 +146,35 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // used by mat-slider
   get tickInterval(): number | 'auto' {
-    return this.showTicks ? (this.autoTicks ? 'auto' : this._tickInterval) : 0;
+    return this.showTicks ? (this.autoTicks ? 'auto' : this.tickInterval) : 0;
   }
   set tickInterval(value) {
-    this._tickInterval = +value;
+    this.tickInterval = +value;
   }
+
+  onShowDetail() {
+    this.showDetail = !this.showDetail;
+    if (this.showDetail) {
+      this.showDetailLabel = 'Hide Detail';
+    } else {
+      this.showDetailLabel = 'Show Detail';
+    }
+  }
+  buildForm(): void {
+    this.form = this.fb.group({
+      annualMiles: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      cashDown: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }]
+    });
+  }
+  onAnnualMilesChange(event: MatSliderChange) {
+    // let v = event.value;
+    this.annualMiles = Number(event!.value);
+  }
+
 }

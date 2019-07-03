@@ -3,30 +3,42 @@
   <mat-spinner mode="indeterminate"></mat-spinner>
   <b>Loading...</b>
 </div>
-<!-- don't forget to include FlexLayoutModule -->
-<div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
-  <div fxLayout="row wrap">
-    <div *ngFor="let dealer of dealers" fxFlex="20" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100"
-      style="padding: 5px;">
-      <!-- cards here -->
-      <mat-card class="mat-elevation-z1">
-        <mat-card-header>
-            <img *ngIf="dealer.state == 'FL'" mat-card-avatar src="https://www.oshaeducationcenter.com/images/state-florida.png">
-            <img *ngIf="dealer.state == 'NC'" mat-card-avatar src="http://www.saferstates.org/assets/details-page-images/northcarolina.png">
-            <img *ngIf="dealer.state == 'TX'" mat-card-avatar src="https://www.womply.com/wp-content/uploads/2018/04/TX-300x284.png">
-            <img *ngIf="dealer.state == 'SC'" mat-card-avatar src="http://respectmyvote.com/wp-content/uploads/2016/07/034089-simple-red-glossy-icon-culture-state-south-carolina.png">
-            <img *ngIf="dealer.state == 'GA'" mat-card-avatar src="https://cdn.pixabay.com/photo/2015/08/16/04/52/georgia-890614_960_720.png">
-            <img *ngIf="dealer.state == 'AR'" mat-card-avatar src="https://bulbcycle.com/wp-content/uploads/2015/09/arkansas.png">
-            <img *ngIf="dealer.state == 'AL'" mat-card-avatar src="https://www.goodjobsfirst.org/sites/default/files/images/states/alabama.png">
-            <img *ngIf="dealer.state == 'AZ'" mat-card-avatar src="https://directorsblog.health.azdhs.gov/wp-content/uploads/2013/05/Arizona-265x300.png">
-          <mat-card-title>
-            <a (click)="openSettings(dealer.cmsCompanyId)">{{dealer.dba}}</a>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>{{dealer.city}}, {{dealer.state}}<br/>
-          CMSId: {{dealer.cmsCompanyId}}
-        </mat-card-content>
-      </mat-card>
+<div>
+  <input type="text" placeholder="Search..." class="margin">
+</div>
+<div>
+  <!-- don't forget to include FlexLayoutModule -->
+  <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
+    <div fxLayout="row wrap">
+      <div *ngFor="let dealer of dealers" fxFlex="20" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100"
+        style="padding: 5px;">
+        <mat-card class="mat-elevation-z1">
+          <mat-card-header>
+            <img *ngIf="dealer.state == 'FL'" mat-card-avatar
+              src="https://www.oshaeducationcenter.com/images/state-florida.png">
+            <img *ngIf="dealer.state == 'NC'" mat-card-avatar
+              src="http://www.saferstates.org/assets/details-page-images/northcarolina.png">
+            <img *ngIf="dealer.state == 'TX'" mat-card-avatar
+              src="https://www.womply.com/wp-content/uploads/2018/04/TX-300x284.png">
+            <img *ngIf="dealer.state == 'SC'" mat-card-avatar
+              src="http://respectmyvote.com/wp-content/uploads/2016/07/034089-simple-red-glossy-icon-culture-state-south-carolina.png">
+            <img *ngIf="dealer.state == 'GA'" mat-card-avatar
+              src="https://cdn.pixabay.com/photo/2015/08/16/04/52/georgia-890614_960_720.png">
+            <img *ngIf="dealer.state == 'AR'" mat-card-avatar
+              src="https://bulbcycle.com/wp-content/uploads/2015/09/arkansas.png">
+            <img *ngIf="dealer.state == 'AL'" mat-card-avatar
+              src="https://www.goodjobsfirst.org/sites/default/files/images/states/alabama.png">
+            <img *ngIf="dealer.state == 'AZ'" mat-card-avatar
+              src="https://directorsblog.health.azdhs.gov/wp-content/uploads/2013/05/Arizona-265x300.png">
+            <mat-card-title>
+              <a (click)="openSettings(dealer.cmsCompanyId)">{{dealer.dba}}</a>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>{{dealer.city}}, {{dealer.state}}<br />
+            CMSId: {{dealer.cmsCompanyId}}
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

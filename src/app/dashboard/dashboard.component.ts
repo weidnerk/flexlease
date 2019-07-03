@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { crownhonda } from './data';
 import { crownjaguar } from './data';
+import { single } from './data';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,7 @@ export class DashboardComponent {
 
   crownhonda: any[];
   crownjaguar: any[];
+  single: any[];
 
   view: any[] = [200, 200];
 
@@ -26,7 +28,8 @@ export class DashboardComponent {
 
     Object.assign(this, {
       crownhonda,
-      crownjaguar
+      crownjaguar,
+      single
     });
   }
 

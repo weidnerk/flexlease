@@ -8,15 +8,6 @@
       <app-objectarrayprint [object]="residuals"></app-objectarrayprint>
     </div>
   </mat-tab>
-  <mat-tab label="Car Ratings Deduct">
-    <div *ngIf='carRatingDeductsLoading'>
-      <mat-spinner mode="indeterminate"></mat-spinner>
-      <b>Loading...</b>
-    </div>
-    <div *ngIf="carRatingDeductsLoaded">
-      <app-objectarrayprint [object]="carRatingDeducts"></app-objectarrayprint>
-    </div>
-  </mat-tab>
   <mat-tab label="Dealer Profile">
     <div *ngIf='dealerProfileLoading'>
       <mat-spinner mode="indeterminate"></mat-spinner>

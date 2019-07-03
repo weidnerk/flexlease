@@ -5,22 +5,13 @@
 <!-- don't forget to include FlexLayoutModule -->
 <div fxFlex fxLayout="column" fxLayoutGap="10px" style="height: 100vh">
   <div fxLayout="row wrap">
-    <!-- loop over the cardList and show the cards -->
-    <div 
-      *ngFor="let lease of leases"
-      fxFlex="20"
-      fxFlex.md="33"
-      fxFlex.sm="50"
-      fxFlex.xs="100"
-      fxLayout="column"
-      style="padding: 5px;"
-    >
-      <!-- cards here -->
+    <div *ngFor="let lease of leases" fxFlex="20" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" fxLayout="column" style="padding: 5px;">
       <mat-card class="mat-elevation-z1">
         <mat-card-title> {{lease.lastName}}, {{lease.firstName}}</mat-card-title>
-        <mat-card-content><br/>{{lease.dealerName}}<br/>
-          App ID: <a [routerLink]="['/lease', lease.lenderAppId]">{{lease.lenderAppId}}</a>
-         </mat-card-content>
+        <mat-card-content><br />{{lease.dealerName}}<br />
+          App ID:
+            <a [routerLink]="['/lease', lease.lenderAppId]">{{lease.lenderAppId}}</a>
+        </mat-card-content>
       </mat-card>
     </div>
   </div>

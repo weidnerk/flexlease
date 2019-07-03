@@ -28,3 +28,24 @@ height: 300px;
 }
 
 /* End slider styles */
+
+.tabpadding {
+  padding: 20px;
+}
+.hide {
+  display:none;
+}
+.show {
+  display:block;
+}
+
+.outlinepadding ::ng-deep .mat-form-field-infix {
+  padding: 0px 0 3px 0; /* top,right,bottom,right */
+  font-size: 14px;
+}
+
+/* moves input up/down, affects padding - helps to manage height of control */
+.outlinepaddingselect ::ng-deep .mat-form-field-infix {
+  padding: 12px 0 7px 0; /* top,right,bottom,right */
+  // bottom: 10px;        /* moves text in textbox up and down, but arrow not aligned */
+}

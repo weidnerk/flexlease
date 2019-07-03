@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SettingsComponent } from './settings.component';
 import { routing } from './settings.routes';
 import { SettingsdialogComponent } from '../settingsdialog/settingsdialog.component';
-import { MatDialogModule, MatInputModule, MatButtonModule } from '@angular/material';
+import { MatDialogModule, MatInputModule, MatButtonModule, MatTabsModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../_services/data.service';
 
@@ -16,7 +16,8 @@ import { DataService } from '../_services/data.service';
     MatDialogModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTabsModule
   ],
   entryComponents: [SettingsdialogComponent],
   providers: [DataService],

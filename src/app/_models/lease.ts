@@ -30,6 +30,15 @@ export interface LeaseResult {
     annualMilesChargeCalc: AdditionalMilesChargeCalculation;
     taxesDue: TaxesDue;
     reserveToDealer: ReserveToDealer;
+    collectFromLessee: CollectFromLessee;
+    amountDueDealer: AmountDueDealer;
+    discountPercent: DiscountPercent;
+    minDiscount: MinDiscount;
+    targetLeaseCap: TargetLeaseCap;
+    overTargetFinDisc: OverTargetFinDisc;
+    leaseDiscount: LeaseDiscount;
+    dealerSaleNetProfit: DealerSaleNetProfit;
+    minCashDown: MinCashDown;
 }
 export interface ResidualCalculation {
     pct: number;
@@ -37,6 +46,8 @@ export interface ResidualCalculation {
     carRating: string;
     bookValue: number;
     residualDeduct: number;
+    retailValue: number;
+    yearResidualImpactor: number;
     value: number;
 }
 export interface GrossCapCost {
@@ -46,11 +57,13 @@ export interface GrossCapCost {
     value: number;
 }
 export interface AdjCapCost {
+    cash: number;
     capCostReduction: number;
+    message: string;
     value: number;
 }
 export interface PmtCalc {
-     adjustedCapitalizedCost: number;
+     adjCapCost: number;
      residual: number;
      depreciation: number;
      adjCapitalizedCostResidual: number;
@@ -62,8 +75,10 @@ export interface PmtCalc {
      value: number;
 }
 export interface BookCalc {
-    value: number;
     icoValue: number;
+    nadaBookValue: number;
+    retailValue: number;
+    value: number;
 }
 export interface AdditionalMilesChargeCalculation {
     value: number;
@@ -71,10 +86,6 @@ export interface AdditionalMilesChargeCalculation {
 }
 export interface LeaseResidual {
     month: number;
-    percent: number;
-}
-export interface CarRatingDeduct {
-    rating: string;
     percent: number;
 }
 export interface TaxesDue {
@@ -91,11 +102,89 @@ export interface ReserveToDealer {
     totalReserveOverTerm: number;
     pctSplitPaid: number;
     value: number;
+    adjCapitalizedCostResidual: number;
 }
-export interface DealerProfile
-{
+export interface DealerProfile {
     yearModel: string;
     dlrBuyFactor: number;
-    // maxSellFactor: number;
-    // regularTerm: number;
+    maxSellFactor: number;
+    regularTerm: number;
+}
+export interface CollectFromLessee {
+    capCostReduction: number;
+    securityDeposit: number;
+    salesTax: number;
+    stateFees: number;
+    optionalProducts: number;
+    value: number;
+}
+export interface AmountDueDealer {
+    adjustedCapitalizedCost: number;
+    firstSingleMonthlyPayment: number;
+    leaseAcquisitionFee: number;
+    dealerReserve: number;
+    lessDiscount: number;
+    value: number;
+}
+export interface DiscountPercent {
+    adjustedCapitalizedCost: number;
+    randomNumber: number;
+    value: number;
+}
+export interface MinDiscount {
+    adjCapCost: number;
+    minDiscPercent: number;
+    value: number;
+}
+export interface OverTargetFinDisc {
+    discountAdvChange: number;
+    targetLeaseCap: number;
+    discountAdvanceOverPct: number;
+    discountAdvanceUnderPct: number;
+    value: number;
+
+}
+export interface TargetLeaseCap {
+    bookValue: number;
+    markupTarget: number;
+    value: number;
+}
+export interface LeaseDiscount
+{
+    minDiscount: number;
+    value: number;
+}
+export interface DealerSaleNetProfit
+{
+    leaseNetCheck: number;
+    downPmt: number;
+    tag: number;
+    prepPac: number;
+    dealerReserve: number;
+    costAuction: number;
+    shopFees: number;
+    estDealerInventoryCost: number;
+    value: number;
+}
+export interface AdjCapCostLimit {
+    maxMarkup1: number;
+    maxMarkup2: number;
+    bookValue: number;
+    adjCapCost: number;
+    value: number;
+}
+export interface SalePrice
+{
+    shopFees: number;
+    bookValue: number;
+    dealerMarkup: number;
+    value: number;
+}
+export interface MinCashDown
+{
+    cash: number;
+    tradein: number;
+    tradeinPayoff: number;
+    message: string;
+    value: number;
 }

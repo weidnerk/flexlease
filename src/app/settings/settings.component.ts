@@ -14,8 +14,8 @@ export class SettingsComponent implements OnInit {
               private router: Router,
     ) {
     const dialogRef = this.dialog.open(SettingsdialogComponent, {
-      height: '400px',
-      width: '300px'
+      height: '650px',
+      width: '700px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

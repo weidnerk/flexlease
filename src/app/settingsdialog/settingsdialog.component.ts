@@ -25,9 +25,18 @@ export class SettingsdialogComponent implements OnInit {
   get minIndIncome() { return this.form.get('minIndIncome'); }
   get minJointIncome() { return this.form.get('minJointIncome'); }
   get acqFee() { return this.form.get('acqFee'); }
+  get maxMarkupPct() { return this.form.get('maxMarkupPct'); }
+  get maxMarkup1() { return this.form.get('maxMarkup1'); }
+  get maxMarkup2() { return this.form.get('maxMarkup2'); }
+  get minCashDown() { return this.form.get('minCashDown'); }
+  get minCashDownPct() { return this.form.get('minCashDownPct'); }
+  get bRatingPctOffset() { return this.form.get('bRatingPctOffset'); }
+  get cRatingPctOffset() { return this.form.get('cRatingPctOffset'); }
+  get yearResidualImpactor() { return this.form.get('yearResidualImpactor'); }
+  get leaseContractRate() { return this.form.get('leaseContractRate'); }
+  get standardLeaseTerm() { return this.form.get('standardLeaseTerm'); }
 
   buildForm(): void {
-
     this.form = this.fb.group({
       minIndIncome: [null, {
         validators: [Validators.required, Validators.minLength(2)],
@@ -40,7 +49,48 @@ export class SettingsdialogComponent implements OnInit {
       acqFee: [null, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
+      }],
+      maxMarkupPct: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      maxMarkup1: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      maxMarkup2: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      minCashDown: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      minCashDownPct: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      bRatingPctOffset: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      cRatingPctOffset: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      yearResidualImpactor: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      leaseContractRate: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      standardLeaseTerm: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
       }]
+
     });
     this.loadData();
   }
@@ -77,6 +127,56 @@ export class SettingsdialogComponent implements OnInit {
               acqFee: m.value1
             });
           }
+          if (m.ruleName === 'Max Markup %') {
+            this.form.patchValue({
+              maxMarkupPct: m.value1
+            });
+          }
+          if (m.ruleName === 'Max Markup 1') {
+            this.form.patchValue({
+              maxMarkup1: m.value1
+            });
+          }
+          if (m.ruleName === 'Max Markup 2') {
+            this.form.patchValue({
+              maxMarkup2: m.value1
+            });
+          }
+          if (m.ruleName === 'Min Cash Down $') {
+            this.form.patchValue({
+              minCashDown: m.value1
+            });
+          }
+          if (m.ruleName === 'Min Cash Down %') {
+            this.form.patchValue({
+              minCashDownPct: m.value1
+            });
+          }
+          if (m.ruleName === 'B Rating % Offset') {
+            this.form.patchValue({
+              bRatingPctOffset: m.value1
+            });
+          }
+          if (m.ruleName === 'C Rating % Offset') {
+            this.form.patchValue({
+              cRatingPctOffset: m.value1
+            });
+          }
+          if (m.ruleName === 'Year Residual Impactor') {
+            this.form.patchValue({
+              yearResidualImpactor: m.value1
+            });
+          }
+          if (m.ruleName === 'Lease Contract Rate') {
+            this.form.patchValue({
+              leaseContractRate: m.value1
+            });
+          }
+          if (m.ruleName === 'Standard Lease Term') {
+            this.form.patchValue({
+              standardLeaseTerm: m.value1
+            });
+          }
         }
       },
       error => {
@@ -104,6 +204,36 @@ export class SettingsdialogComponent implements OnInit {
           break;
         case 'Acquisition Fee':
           m.value1 = this.acqFee!.value;
+          break;
+        case 'Max Markup %':
+          m.value1 = this.maxMarkupPct!.value;
+          break;
+        case 'Max Markup 1':
+          m.value1 = this.maxMarkup1!.value;
+          break;
+        case 'Max Markup 2':
+          m.value1 = this.maxMarkup2!.value;
+          break;
+        case 'Min Cash Down $':
+          m.value1 = this.minCashDown!.value;
+          break;
+        case 'Min Cash Down %':
+          m.value1 = this.minCashDownPct!.value;
+          break;
+        case 'B Rating % Offset':
+          m.value1 = this.bRatingPctOffset!.value;
+          break;
+        case 'C Rating % Offset':
+          m.value1 = this.cRatingPctOffset!.value;
+          break;
+        case 'Year Residual Impactor':
+          m.value1 = this.yearResidualImpactor!.value;
+          break;
+        case 'Lease Contract Rate':
+          m.value1 = this.leaseContractRate!.value;
+          break;
+        case 'Standard Lease Term':
+          m.value1 = this.standardLeaseTerm!.value;
           break;
       }
     }
