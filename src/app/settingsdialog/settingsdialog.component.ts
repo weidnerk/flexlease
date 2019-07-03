@@ -32,7 +32,6 @@ export class SettingsdialogComponent implements OnInit {
   get minCashDownPct() { return this.form.get('minCashDownPct'); }
   get bRatingPctOffset() { return this.form.get('bRatingPctOffset'); }
   get cRatingPctOffset() { return this.form.get('cRatingPctOffset'); }
-  get yearResidualImpactor() { return this.form.get('yearResidualImpactor'); }
   get leaseContractRate() { return this.form.get('leaseContractRate'); }
   get standardLeaseTerm() { return this.form.get('standardLeaseTerm'); }
 
@@ -75,10 +74,6 @@ export class SettingsdialogComponent implements OnInit {
         updateOn: 'submit'
       }],
       cRatingPctOffset: [null, {
-        validators: [Validators.required, Validators.minLength(2)],
-        updateOn: 'submit'
-      }],
-      yearResidualImpactor: [null, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
       }],
@@ -162,11 +157,6 @@ export class SettingsdialogComponent implements OnInit {
               cRatingPctOffset: m.value1
             });
           }
-          if (m.ruleName === 'Year Residual Impactor') {
-            this.form.patchValue({
-              yearResidualImpactor: m.value1
-            });
-          }
           if (m.ruleName === 'Lease Contract Rate') {
             this.form.patchValue({
               leaseContractRate: m.value1
@@ -225,9 +215,6 @@ export class SettingsdialogComponent implements OnInit {
           break;
         case 'C Rating % Offset':
           m.value1 = this.cRatingPctOffset!.value;
-          break;
-        case 'Year Residual Impactor':
-          m.value1 = this.yearResidualImpactor!.value;
           break;
         case 'Lease Contract Rate':
           m.value1 = this.leaseContractRate!.value;

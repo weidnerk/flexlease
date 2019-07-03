@@ -232,7 +232,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <mat-icon>money_off</mat-icon>Reserve To Dealer
+                <mat-icon>money_off</mat-icon>Reserve To Dealer (??)
               </mat-panel-title>
               <mat-panel-description>
               </mat-panel-description>
@@ -256,7 +256,7 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <mat-icon>money_off</mat-icon>Amount Due Dealer
+                <mat-icon>money_off</mat-icon>Amount Due Dealer (need to get [Reserve To Dealer] correct)
               </mat-panel-title>
               <mat-panel-description>
               </mat-panel-description>
@@ -354,6 +354,7 @@
     </form>
   </mat-tab>
   <mat-tab label="Dealer Sale Net Profit">
+    <br/>&nbsp;Need to get [Amount Due Dealer] correct
     <div *ngIf="loaded" class="tabpadding">
       <app-objectprint [object]="lease.leaseResult.dealerSaleNetProfit"></app-objectprint>
     </div>
