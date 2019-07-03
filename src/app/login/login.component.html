@@ -12,7 +12,8 @@
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
             <mat-form-field appearance="outline" class="outlinepadding">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" class="matinput" name="password" [(ngModel)]="model.Password"
+                    <mat-pass-toggle-visibility #toggle matSuffix></mat-pass-toggle-visibility>
+                    <input matInput type="password" [type]="toggle.type" class="matinput" name="password" [(ngModel)]="model.Password"
                     #password="ngModel" />
             </mat-form-field>
             <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>

@@ -5,45 +5,44 @@ import { AuthenticationService } from '../_services/index';
 import { User } from '../_models/index';
 
 @Component({
-    // moduleId: module.id,
-    templateUrl: 'login.component.html',
-    styleUrls: ['./login.component.scss']
+  // moduleId: module.id,
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit {
-    model: User = {} as User;
-    loading = false;
-    errorMessage: string;
+  model: User = {} as User;
+  loading = false;
+  errorMessage: string;
 
-    constructor(
-        private router: Router,
-        private authenticationService: AuthenticationService) { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService) { }
 
-    ngOnInit() {
-        // reset login status
-        this.authenticationService.logout();
-    }
+  ngOnInit() {
+    // reset login status
+    this.authenticationService.logout();
+  }
 
-    login() {
+  login() {
 
-        this.loading = true;
-        this.authenticationService.login(this.model.Username, this.model.Password)
-            .subscribe(
-            response => {
-                this.router.navigate(['/']);
-            },
-            error => {
-                this.loading = false;
-                if (error.status === 400) {
-                  if (error.error.error_description) {
-                    this.errorMessage = error.error.error_description;
-                  } else {
-                    this.errorMessage = error as any;
-                  }
-                } else {
-                  this.errorMessage = error as any;
-                }
-              });
-        }
-
+    this.loading = true;
+    this.authenticationService.login(this.model.Username, this.model.Password)
+      .subscribe(
+        response => {
+          this.router.navigate(['/']);
+        },
+        error => {
+          this.loading = false;
+          if (error.status === 400) {
+            if (error.error.error_description) {
+              this.errorMessage = error.error.error_description;
+            } else {
+              this.errorMessage = error as any;
+            }
+          } else {
+            this.errorMessage = error as any;
+          }
+        });
+  }
 }
