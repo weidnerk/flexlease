@@ -32,7 +32,7 @@ export interface LeaseResult {
     reserveToDealer: ReserveToDealer;
     collectFromLessee: CollectFromLessee;
     amountDueDealer: AmountDueDealer;
-    discountPercent: DiscountPercent;
+    discountPctCalc: DiscountPctCalc;
     minDiscount: MinDiscount;
     targetLeaseCap: TargetLeaseCap;
     overTargetFinDisc: OverTargetFinDisc;
@@ -126,7 +126,7 @@ export interface AmountDueDealer {
     lessDiscount: number;
     value: number;
 }
-export interface DiscountPercent {
+export interface DiscountPctCalc {
     adjustedCapitalizedCost: number;
     randomNumber: number;
     value: number;
@@ -152,6 +152,10 @@ export interface TargetLeaseCap {
 export interface LeaseDiscount
 {
     minDiscount: number;
+    discountPct: number;
+    extraTermDiscount: number;
+    overFinTargetDiscount: number;
+    vehAgeAdj: number;
     value: number;
 }
 export interface DealerSaleNetProfit
@@ -187,4 +191,8 @@ export interface MinCashDown
     tradeinPayoff: number;
     message: string;
     value: number;
+}
+export interface YearResidualImpactor {
+    yearModel: number;
+    impactPct: number;
 }

@@ -115,7 +115,7 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
     const app = {} as CustomerApp;
     app.lenderAppId = this.appid;
 
-    app.annualMiles = this.annualMilesForm!.value;   
+    app.annualMiles = this.annualMilesForm!.value;
     // app.annualMiles = this.annualMiles; // used with onAnnualMilesChange
     app.cashDown = this.cashDown!.value;
 
@@ -133,7 +133,7 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  // used by mat-slider
+  // Used by mat-slider
   formatLabel(value: number | null) {
     if (!value) {
       return 0;
@@ -144,7 +144,7 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
     return value;
   }
 
-  // used by mat-slider
+  // Used by mat-slider
   get tickInterval(): number | 'auto' {
     return this.showTicks ? (this.autoTicks ? 'auto' : this.tickInterval) : 0;
   }

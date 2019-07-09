@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/internal/operators';
 import { environment } from '../../environments/environment';
-import { FLEXDealer } from '../_models/dealer';
-import { MaintenanceValue } from '../_models/MaintenanceValue';
 
 const getUrlMap = new Map<string, string>();
 const getListUrlMap = new Map<string, string>();
@@ -30,6 +28,7 @@ export class DataService {
     private getDealerUrl: string = environment.API_DEALER_ENDPOINT + 'flexdealer';
     private getLeaseResidualsArrayUrl: string = environment.API_ENDPOINT + 'leaseresiduals';
     private getDealerProfileArrayUrl: string = environment.API_ENDPOINT + 'dealerprofile';
+    private getYearResidualImpactorArrayUrl: string = environment.API_ENDPOINT + 'yearresidualimpactor';
 
     private postMaintenanceValueUrl: string = environment.API_MAINT_ENDPOINT;
     private postVehicleModelValueUrl: string = environment.API_VEHICLE_ENDPOINT + 'storevalues';
@@ -187,6 +186,7 @@ export class DataService {
         getListUrlMap.set('MaintenanceValue', this.getMaintValuesUrl);
         getListUrlMap.set('LeaseResidual', this.getLeaseResidualsArrayUrl);
         getListUrlMap.set('DealerProfile', this.getDealerProfileArrayUrl);
+        getListUrlMap.set('YearResidualImpactor', this.getYearResidualImpactorArrayUrl);
 
         // getFromArrayUrlMap.set('MaintenanceValue', this.getMaintValueArrayUrl);
 

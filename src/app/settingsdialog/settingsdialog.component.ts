@@ -34,6 +34,9 @@ export class SettingsdialogComponent implements OnInit {
   get cRatingPctOffset() { return this.form.get('cRatingPctOffset'); }
   get leaseContractRate() { return this.form.get('leaseContractRate'); }
   get standardLeaseTerm() { return this.form.get('standardLeaseTerm'); }
+  get discountPct() { return this.form.get('discountPct'); }
+  get overStandardTermPct() { return this.form.get('overStandardTermPct'); }
+  get underStandardTermPct() { return this.form.get('underStandardTermPct'); }
 
   buildForm(): void {
     this.form = this.fb.group({
@@ -84,8 +87,19 @@ export class SettingsdialogComponent implements OnInit {
       standardLeaseTerm: [null, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
+      }],
+      discountPct: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      overStandardTermPct: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      underStandardTermPct: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
       }]
-
     });
     this.loadData();
   }
@@ -167,6 +181,21 @@ export class SettingsdialogComponent implements OnInit {
               standardLeaseTerm: m.value1
             });
           }
+          if (m.ruleName === 'Discount %') {
+            this.form.patchValue({
+              discountPct: m.value1
+            });
+          }
+          if (m.ruleName === 'Over Standard Term %') {
+            this.form.patchValue({
+              overStandardTermPct: m.value1
+            });
+          }
+          if (m.ruleName === 'Under Standard Term %') {
+            this.form.patchValue({
+              underStandardTermPct: m.value1
+            });
+          }
         }
       },
       error => {
@@ -221,6 +250,15 @@ export class SettingsdialogComponent implements OnInit {
           break;
         case 'Standard Lease Term':
           m.value1 = this.standardLeaseTerm!.value;
+          break;
+        case 'Discount %':
+          m.value1 = this.discountPct!.value;
+          break;
+        case 'Over Standard Term %':
+          m.value1 = this.overStandardTermPct!.value;
+          break;
+        case 'Under Standard Term %':
+          m.value1 = this.underStandardTermPct!.value;
           break;
       }
     }

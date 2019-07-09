@@ -17,4 +17,13 @@
       <app-objectarrayprint [object]="dealerProfiles"></app-objectarrayprint>
     </div>
   </mat-tab>
+  <mat-tab label="Year Residual Impactor">
+    <div *ngIf='yearResidualImpactorLoading'>
+      <mat-spinner mode="indeterminate"></mat-spinner>
+      <b>Loading...</b>
+    </div>
+    <div *ngIf="yearResidualImpactorLoaded">
+      <app-objectarrayprint [object]="yearResidualImpactors"></app-objectarrayprint>
+    </div>
+  </mat-tab>
 </mat-tab-group>

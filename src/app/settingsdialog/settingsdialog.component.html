@@ -9,6 +9,29 @@
       </div>
       <div>
         <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Lease Contract Rate</mat-label>
+          <input matInput formControlName="leaseContractRate" placeholder="Lease Contract Rate" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Standard Lease Term</mat-label>
+          <input matInput formControlName="standardLeaseTerm" placeholder="Standard Lease Term" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
+          <mat-label>Discount %</mat-label>
+          <input matInput formControlName="discountPct" placeholder="Discount %" maxlength="8"
+            class="matinput">
+        </mat-form-field>&nbsp;
+      </div>
+    </mat-tab>
+    <mat-tab label="Discount">
+      <div>
+        <mat-form-field appearance="outline" class="outlinepadding">
           <mat-label>Max Markup %</mat-label>
           <input matInput formControlName="maxMarkupPct" placeholder="Max Markup %" maxlength="8" class="matinput">
         </mat-form-field>&nbsp;
@@ -27,16 +50,14 @@
       </div>
       <div>
         <mat-form-field appearance="outline" class="outlinepadding">
-          <mat-label>Lease Contract Rate</mat-label>
-          <input matInput formControlName="leaseContractRate" placeholder="Lease Contract Rate" maxlength="8"
-            class="matinput">
+          <mat-label>Over Standard Term %</mat-label>
+          <input matInput formControlName="overStandardTermPct" placeholder="Over Standard Term %" maxlength="8" class="matinput">
         </mat-form-field>&nbsp;
       </div>
       <div>
         <mat-form-field appearance="outline" class="outlinepadding">
-          <mat-label>Standard Lease Term</mat-label>
-          <input matInput formControlName="standardLeaseTerm" placeholder="Standard Lease Term" maxlength="8"
-            class="matinput">
+          <mat-label>Under Standard Term %</mat-label>
+          <input matInput formControlName="underStandardTermPct" placeholder="Under Standard Term %" maxlength="8" class="matinput">
         </mat-form-field>&nbsp;
       </div>
     </mat-tab>
