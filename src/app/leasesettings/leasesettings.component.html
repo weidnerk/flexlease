@@ -5,16 +5,27 @@
   </div>
   <mat-tab label="Lease Residuals">
     <div *ngIf="residualsLoaded">
-      <app-objectarrayprint [object]="residuals"></app-objectarrayprint>
+      <app-objectarrayprint objectName="residuals" [object]="residuals" [displayEdit]="false" [formatMap]="{value:'1.2-2'}"></app-objectarrayprint>
     </div>
   </mat-tab>
   <mat-tab label="Dealer Profile">
-    <div *ngIf='dealerProfileLoading'>
+    <!-- <div *ngIf='dealerProfileLoading'>
       <mat-spinner mode="indeterminate"></mat-spinner>
       <b>Loading...</b>
+    </div> -->
+    <div [formGroup]="form">
+      <mat-form-field class="state ml-13 outlinepaddingselect" appearance="outline">
+        <mat-label>State</mat-label>
+        <mat-select formControlName="state" (selectionChange)="stateSelected($event)">
+          <mat-option *ngFor="let s of states" [value]="s.value">
+            {{ s.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div *ngIf="dealerProfileLoaded">
-      <app-objectarrayprint [object]="dealerProfiles"></app-objectarrayprint>
+      <app-objectarrayprint objectName="dealerProfiles" [object]="dealerProfiles" [displayEdit]="false">
+      </app-objectarrayprint>
     </div>
   </mat-tab>
   <mat-tab label="Year Residual Impactor">
@@ -23,7 +34,8 @@
       <b>Loading...</b>
     </div>
     <div *ngIf="yearResidualImpactorLoaded">
-      <app-objectarrayprint [object]="yearResidualImpactors"></app-objectarrayprint>
+      <app-objectarrayprint objectName="Yearresidualimpactors" [object]="yearResidualImpactors" [displayEdit]="true">
+      </app-objectarrayprint>
     </div>
   </mat-tab>
 </mat-tab-group>

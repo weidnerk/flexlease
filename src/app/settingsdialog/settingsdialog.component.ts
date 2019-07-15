@@ -15,6 +15,7 @@ export class SettingsdialogComponent implements OnInit {
   loading = false;
   errorMessage: string;
   form: FormGroup;
+  
   constructor(private fb: FormBuilder,
     private dialogRef: MatDialogRef<SettingsdialogComponent>,
     private dataService: DataService) { }

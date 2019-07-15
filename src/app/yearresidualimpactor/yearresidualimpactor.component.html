@@ -1,0 +1,19 @@
+<h3>Year Residual Impactor</h3>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field appearance="outline" class="outlinepadding">
+      <mat-label>Year Model</mat-label>
+      <input matInput formControlName="yearModel" placeholder="Year Model" maxlength="8" class="matinput">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline" class="outlinepadding">
+      <mat-label>Impact %</mat-label>
+      <input matInput formControlName="impactPct" placeholder="Impact %" maxlength="8" class="matinput">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button color="accent" type="submit" color="primary" mat-raised-button>Save</button>
+    <button mat-button type="button" (click)="onCancel()" tabindex="-1">Cancel</button>
+  </div>
+</form>

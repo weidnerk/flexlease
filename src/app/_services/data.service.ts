@@ -86,6 +86,9 @@ export class DataService {
         }
         if (where !== undefined) {
             url = url + '?' + where[0] + '=' + where[1];
+            if (where.length > 2) {
+                url = url + '&' + where[2] + '=' + where[3];
+            }
         }
         const userJson = localStorage.getItem('currentUser');
         if (userJson) {
