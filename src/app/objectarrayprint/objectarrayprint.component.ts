@@ -1,11 +1,12 @@
 /**
  * Print an array of objects in spreadsheet-like format.
- * 
+ *
  */
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { YearresidualimpactorComponent } from '../yearresidualimpactor/yearresidualimpactor.component';
 
+// If allowing edits, add the edit form component here.  Will also need to import in module.
 const compMap = {
   Yearresidualimpactors: YearresidualimpactorComponent
 };
@@ -19,8 +20,8 @@ const compMap = {
 export class ObjectarrayprintComponent implements OnInit {
   @Input() object: any;
   @Input() objectName: any;
-  @Input() displayEdit: boolean;  // whether to display edit symbol
-  @Input() formatMap: any;        // pass keypair how to format a number (optional)
+  @Input() displayEdit: boolean;  // whether to display edit symbol (pencil)
+  @Input() formatMap: any;        // pass keypair how to format a number using angular number pipe syntax (optional)
 
   constructor(public dialog: MatDialog) { }
 
@@ -62,7 +63,6 @@ export class ObjectarrayprintComponent implements OnInit {
   }
 
   edit(item: any) {
-    // let i = item;
     if (this.objectName in compMap) {
 
       const dialogRef = this.dialog.open(compMap[this.objectName], {
