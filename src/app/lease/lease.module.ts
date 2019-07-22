@@ -7,9 +7,11 @@ import { DataService } from '../_services/data.service';
 import { ObjectprintComponent } from '../objectprint/objectprint.component';
 import { MainPipe } from '../_pipes/main-pipe.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreditprofileModule } from '../creditprofile/creditprofile.module';
 
 @NgModule({
-  declarations: [LeaseComponent,
+  declarations: [
+    LeaseComponent,
     ObjectprintComponent],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MainPipe,
     MatTabsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CreditprofileModule
   ],
   providers: [DataService]
 })

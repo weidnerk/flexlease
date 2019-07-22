@@ -49,3 +49,9 @@ height: 300px;
   padding: 12px 0 7px 0; /* top,right,bottom,right */
   // bottom: 10px;        /* moves text in textbox up and down, but arrow not aligned */
 }
+
+@media (min-width: 1500px) {
+  .container{
+      max-width: 900px;
+  }
+}
