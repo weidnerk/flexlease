@@ -5,6 +5,7 @@ import { Lease, Vehicle, CustomerApp } from '../_models';
 import { DataService } from '../_services/data.service';
 import { MatAccordion, MatExpansionPanel, MatSlider, MatSliderChange } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreditprofileComponent } from '../creditprofile/creditprofile.component';
 
 @Component({
   selector: 'app-lease',
@@ -65,10 +66,10 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
   ngAfterViewInit() {
-    console.log('afterViewInit');
+    // console.log('afterViewInit');
   }
   ngOnDestroy() {
-    console.log('ngOnDestroy');
+    // console.log('ngOnDestroy');
     this.paramsSubscription.unsubscribe();
   }
 

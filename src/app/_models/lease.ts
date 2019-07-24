@@ -13,6 +13,7 @@ export interface CustomerApp {
     lenderAppId: number;
     dealerName: string | null;
     annualMiles: number;
+    disclosures: CustomerAppDisclosures | null;
 }
 export interface CustomerAppAddress {
     zip: string;
@@ -20,6 +21,9 @@ export interface CustomerAppAddress {
 export interface CustomerAppVehicle {
     miles: number;
     year: number;
+}
+export interface CustomerAppDisclosures {
+    limitedCredit: boolean;
 }
 export interface LeaseResult {
     grossCapCost: GrossCapCost;

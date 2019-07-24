@@ -3,7 +3,7 @@
  *
  */
 import { Component, OnInit, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, getMatInputUnsupportedTypeError } from '@angular/material';
 import { YearresidualimpactorComponent } from '../yearresidualimpactor/yearresidualimpactor.component';
 
 // If allowing edits, add the edit form component here.  Will also need to import in module.
@@ -18,10 +18,14 @@ const compMap = {
 })
 
 export class ObjectarrayprintComponent implements OnInit {
-  @Input() object: any;
-  @Input() objectName: any;
-  @Input() displayEdit: boolean;  // whether to display edit symbol (pencil)
-  @Input() formatMap: any;        // pass keypair how to format a number using angular number pipe syntax (optional)
+  @Input() object: any;           // Array of objects
+  @Input() objectName: any;       // String name of object
+  @Input() displayEdit: boolean;  // Whether to display edit symbol (pencil)
+  @Input() formatMap: any;        // Pass keypair how to format a number using angular number pipe syntax (optional)
+                                  // e.g. [formatMap]="{value:'1.2-2'}" where 'value' is a field name in the object
+                                  // Employed by getFormat() below
+  @Input() tableStyle: any;       // Table ngStyle, template is implemented as a table, provide formatting object
+                                  //  such as: [tableStyle]="{'width': '20%'}"
 
   constructor(public dialog: MatDialog) { }
 

@@ -13,6 +13,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatFormFieldModule
   ],
-  exports: [CreditprofileComponent]
+  exports: [CreditprofileComponent]   // cannot forget this
 })
 export class CreditprofileModule { }

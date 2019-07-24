@@ -36,8 +36,8 @@
               </tr>
             </table>
           </div>
-          <div class="col border border-light rounded">
-            <app-creditprofile></app-creditprofile>
+          <div *ngIf="loaded" class="col border border-light rounded">
+            <app-creditprofile [disclosures]="lease.customerApp.disclosures"></app-creditprofile>
           </div>
           <div class="col border border-light rounded">
             <div class="row">
