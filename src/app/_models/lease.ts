@@ -141,6 +141,7 @@ export interface MinDiscount {
     value: number;
 }
 export interface OverTargetFinDisc {
+    adjustedCapitalizedCost: number;
     discountAdvChange: number;
     targetLeaseCap: number;
     discountAdvanceOverPct: number;
