@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../_services/index';
 import { User } from '../_models/index';
+import { environment } from 'src/environments/environment';
 
 @Component({
   // moduleId: module.id,
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
   login() {
 
     this.loading = true;
-    this.authenticationService.login(this.model.Username, this.model.Password)
+    this.authenticationService.login(this.model.Username, this.model.Password, environment.API_KEY)
       .subscribe(
         response => {
           this.router.navigate(['/']);

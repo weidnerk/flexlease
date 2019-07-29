@@ -10,11 +10,11 @@ import { ASPNETMembershipUser } from '../_models';
 export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
-    login(username, password) {
+    login(username, password, apikey) {
 
         const url = environment.LOGIN_API_ENDPOINT + 'login';
         const body: ASPNETMembershipUser = { Username: username, Password: password};
-        const _options = { headers: new HttpHeaders({ 'API_KEY': 'b86b73b4-0bcd-46e1-9152-aed1f7d2b87d' }) };
+        const _options = { headers: new HttpHeaders({ 'API_KEY': apikey }) };
 
         return this.http.post<any>(url, body, _options).pipe(
             map(user => {
