@@ -27,6 +27,8 @@ export class CreditprofileComponent implements OnInit {
   buildForm(): void {
     this.form = this.fb.group({
       limitedCredit: [{value: false, disabled: true},
+        { updateOn: 'submit' }],
+      poiIssues: [{value: false, disabled: false},
         { updateOn: 'submit' }]
     });
   }

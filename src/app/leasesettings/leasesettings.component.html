@@ -5,7 +5,7 @@
   </div>
   <mat-tab label="Lease Residuals">
     <div *ngIf="residualsLoaded">
-      <app-objectarrayprint objectName="residuals" [object]="residuals" [displayEdit]="false" [formatMap]="{value:'1.2-2'}"></app-objectarrayprint>
+      <app-objectarrayprint objectName="residuals" [object]="residuals" [displayEdit]="true" [formatMap]="{value:'1.2-2'}" [tableStyle]="{'width': '20%'}"></app-objectarrayprint>
     </div>
   </mat-tab>
   <mat-tab label="Dealer Profile">
@@ -24,7 +24,7 @@
       </mat-form-field>
     </div>
     <div *ngIf="dealerProfileLoaded">
-      <app-objectarrayprint objectName="dealerProfiles" [object]="dealerProfiles" [displayEdit]="false">
+      <app-objectarrayprint objectName="dealerProfiles" [object]="dealerProfiles" [displayEdit]="true">
       </app-objectarrayprint>
     </div>
   </mat-tab>

@@ -1,13 +1,17 @@
 <span style="color:red">{{ errorMessage }}</span>
 <mat-tab-group>
   <mat-tab label="Lease">
-    <span *ngIf="loading">
+    <span *ngIf="wait">
       <img
         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </span>
-
-    <form [formGroup]="form" *ngIf="loaded" class="tabpadding" (ngSubmit)="onStore()" novalidate>
-      <h4>{{lease.customerApp.firstName}} {{lease.customerApp.lastName}}</h4>
+    <form [formGroup]="form" *ngIf="leaseLoaded" class="tabpadding" (ngSubmit)="onStore()" novalidate>
+      <h4>
+        {{lease.customerApp.firstName}} {{lease.customerApp.lastName}}
+        <button [hidden]="editingLease" type="button" mat-mini-fab (click)="$event.stopPropagation();edit(o);">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </h4>
       <div class="container-fluid">
         <div class="row">
           <div class="col border border-light rounded" *ngIf="vehicleLoaded">
@@ -23,7 +27,12 @@
                   VIN:
                 </td>
                 <td class="numericcell">
-                  {{vehicle.vin}}
+                  <span [hidden]="editingLease">{{vehicle.vin}}</span>
+                  <span [hidden]="!editingLease">
+                    <mat-form-field appearance="outline" class="outlinepadding">
+                      <input matInput formControlName="vin" placeholder="VIN" maxlength="17" class="matinput">
+                    </mat-form-field>
+                  </span>
                 </td>
               </tr>
               <tr>
@@ -31,12 +40,20 @@
                   Miles:
                 </td>
                 <td class="numericcell">
-                  {{vehicle.miles}}
+                  <span [hidden]="editingLease">{{vehicle.miles}}</span>
+                  <span [hidden]="!editingLease">
+                    <mat-form-field appearance="outline" class="outlinepadding">
+                      <input matInput formControlName="miles" placeholder="Miles" maxlength="8" class="matinput">
+                    </mat-form-field>
+                  </span>
                 </td>
               </tr>
             </table>
+            <div class="mt-4" *ngIf="leaseLoaded">
+              <app-objectprint [object]="lease.leaseResult.bookCalc"></app-objectprint>
+            </div>
           </div>
-          <div *ngIf="loaded" class="col border border-light rounded">
+          <div *ngIf="leaseLoaded" class="col border border-light rounded">
             <app-creditprofile [disclosures]="lease.customerApp.disclosures"></app-creditprofile>
           </div>
           <div class="col border border-light rounded">
@@ -95,7 +112,7 @@
             <div class="row mt-2">
               <div class="col">
                 <p>Annual miles elected</p>
-                <mat-slider formControlName="annualMiles" [disabled]="disabled" [invert]="invert" [max]="max"
+                <mat-slider formControlName="annualMiles" [invert]="invert" [max]="max"
                   [min]="min" [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="tick" [displayWith]="formatLabel"
                   [vertical]="vertical" (change)="onAnnualMilesChange($event)">
                 </mat-slider>
@@ -104,7 +121,9 @@
           </div>
         </div>
       </div>
-      <button mat-button type="submit" tabindex="-1">Update</button>
+      <button [disabled]="!editingLease" mat-button type="submit" tabindex="-1">Update</button>
+      <button [disabled]="!editingLease" mat-button (click)="onCancelEdit(); $event.preventDefault()" color="accent" type="button"
+        tabindex="-1">Exit</button>
       <button mat-button (click)="onShowDetail(); $event.preventDefault()">{{showDetailLabel}}</button>
       <div [ngClass]="showDetail ? 'show' : 'hide'">
         <button mat-button (click)="accordion.openAll()">Expand All </button>
@@ -118,7 +137,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <table>
                 <tr>
                   <td>
@@ -142,24 +161,12 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                <mat-icon>book</mat-icon>Retail Book Value
-              </mat-panel-title>
-              <mat-panel-description>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div *ngIf="loaded">
-              <app-objectprint [object]="lease.leaseResult.bookCalc"></app-objectprint>
-            </div>
-          </mat-expansion-panel>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
                 <mat-icon>looks_one</mat-icon>Sale Price
               </mat-panel-title>
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.salePrice"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -171,7 +178,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.grossCapCost"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -183,7 +190,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.residualCalculation"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -195,7 +202,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.adjCapCost"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -207,7 +214,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.pmtCalc"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -219,7 +226,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.taxesDue"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -231,7 +238,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.reserveToDealer"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -243,7 +250,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.collectFromLessee"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -255,7 +262,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.amountDueDealer"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -267,7 +274,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.discountPctCalc"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -279,7 +286,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.minDiscount"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -291,7 +298,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.targetLeaseCap"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -303,7 +310,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.overTargetFinDisc"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -315,7 +322,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.leaseDiscount"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -327,7 +334,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.adjCapCostLimit"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -339,7 +346,7 @@
               <mat-panel-description>
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <div *ngIf="loaded">
+            <div *ngIf="leaseLoaded">
               <app-objectprint [object]="lease.leaseResult.minCashDown"></app-objectprint>
             </div>
           </mat-expansion-panel>
@@ -349,7 +356,7 @@
 
   </mat-tab>
   <mat-tab label="Dealer Sale Net Profit">
-    <div *ngIf="loaded" class="tabpadding">
+    <div *ngIf="leaseLoaded" class="tabpadding">
       <app-objectprint [object]="lease.leaseResult.dealerSaleNetProfit"></app-objectprint>
     </div>
   </mat-tab>

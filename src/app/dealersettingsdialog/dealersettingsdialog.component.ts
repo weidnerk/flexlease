@@ -29,7 +29,7 @@ export class DealersettingsdialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('dialog dealerid: ' + this.dealerid);
+    // console.log('dialog dealerid: ' + this.dealerid);
     this.getDealer();
     this.buildForm();
   }
@@ -40,7 +40,7 @@ export class DealersettingsdialogComponent implements OnInit {
       data => {
         this.dealer = data;
         this.loading = false;
-        console.log('dba: ' + this.dealer.dba);
+        // console.log('dba: ' + this.dealer.dba);
         this.form.patchValue({
           dealerDocFee: this.dealer.serviceFee,
           cmsid: this.dealer.cmsCompanyId,

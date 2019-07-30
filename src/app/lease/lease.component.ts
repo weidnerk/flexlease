@@ -15,8 +15,8 @@ import { CreditprofileComponent } from '../creditprofile/creditprofile.component
 export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   errorMessage: string;
-  loading = false;
-  loaded = false;
+  wait = false;
+  leaseLoaded = false;
   appid: number;
   lease: Lease;
   private paramsSubscription: Subscription;
@@ -28,6 +28,7 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
   showDetailLabel = 'Show Detail';
   form: FormGroup;
   annualMiles: number;
+  private editingLease = false;
 
   residualValueKeys: string[] = [];
   residualValueValues: string[] = [];
@@ -37,7 +38,6 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // 'Annual miles elected' slider settings
   autoTicks = false;
-  disabled = false;
   invert = false;
   max = 18000;
   min = 15000;
@@ -53,8 +53,10 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
               private dataService: DataService,
               private fb: FormBuilder) { }
 
-  get annualMilesForm() { return this.form.get('annualMiles'); }
-  get cashDown() { return this.form.get('cashDown'); }
+  get ctlAnnualMiles() { return this.form.get('annualMiles'); }
+  get ctlCashDown() { return this.form.get('cashDown'); }
+  get ctlMiles() { return this.form.get('miles'); }
+  get ctlVin() { return this.form.get('vin'); }
 
   ngOnInit() {
     this.buildForm();
@@ -75,19 +77,21 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Get lease and calculate
   getLease() {
-    this.loading = true;
+    this.wait = true;
     this.dataService.getValue<Lease>('Lease', this.appid).subscribe(
       data => {
         this.lease = data;
-        this.loading = false;
-        this.loaded = true;
+        this.leaseLoaded = true;
         this.form.patchValue({
           cashDown: this.lease.customerApp.cashDown,
-          annualMiles: this.lease.customerApp.annualMiles
+          annualMiles: this.lease.customerApp.annualMiles,
+          miles: this.vehicle.miles,
+          vin: this.vehicle.vin
         });
+        this.wait = false;
       },
       error => {
-        this.loading = false;
+        this.wait = false;
         console.log('getLease: ' + error);
         this.errorMessage = error;
       }
@@ -95,6 +99,7 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
       () => console.log('Job Done Post !')
     );
   }
+
   getVehicle() {
     this.loadingVehicle = true;
     this.dataService.getValue<Vehicle>('Vehicle', this.appid).subscribe(
@@ -112,22 +117,27 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
       () => console.log('Job Done Post !')
     );
   }
+
   onStore() {
+    console.log('onStore');
+    this.wait = true;
     const app = {} as CustomerApp;
     app.lenderAppId = this.appid;
 
-    app.annualMiles = this.annualMilesForm!.value;
+    app.annualMiles = this.ctlAnnualMiles!.value;
     // app.annualMiles = this.annualMiles; // used with onAnnualMilesChange
-    app.cashDown = this.cashDown!.value;
+    app.cashDown = this.ctlCashDown!.value;
 
     this.dataService.storeObject<CustomerApp>('CustomerApp', app, ['AnnualMiles', 'CashDown']).subscribe(
       data => {
-        this.errorMessage = 'Record has been stored.';
         this.getLease();
+        // this.editingLease = false;
       },
       error => {
         console.log('storeDealer: ' + error);
         this.errorMessage = error;
+        this.editingLease = false;
+        this.wait = false;
       }
       ,      // in case of failure show this message
       () => console.log('Job Done Post !')
@@ -163,12 +173,20 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   buildForm(): void {
     this.form = this.fb.group({
-      annualMiles: [null, {
+      annualMiles: [{value: null, disabled: true}, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
       }],
-      cashDown: [null, {
+      cashDown: [{value: null, disabled: true}, {
         validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      miles: [null, {
+        validators: [Validators.required, Validators.minLength(2)],
+        updateOn: 'submit'
+      }],
+      vin: [null, {
+        validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17)],
         updateOn: 'submit'
       }]
     });
@@ -178,4 +196,16 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.annualMiles = Number(event!.value);
   }
 
+  edit(item: any) {
+    this.editingLease = true;
+    this.ctlCashDown!.enable();
+    this.ctlAnnualMiles!.enable();
+  }
+
+  onCancelEdit() {
+    this.editingLease = false;
+    this.ctlCashDown!.disable();
+    this.ctlAnnualMiles!.disable();
+    this.getLease();  // abandon changes
+  }
 }

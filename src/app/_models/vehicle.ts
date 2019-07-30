@@ -3,6 +3,7 @@ export interface Vehicle {
     bookValue: number;
     make: string;
     model: string;
+    miles: number;
 }
 
 export interface VehicleMake {
