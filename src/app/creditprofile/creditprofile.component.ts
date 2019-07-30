@@ -13,6 +13,8 @@ export class CreditprofileComponent implements OnInit {
 
   constructor(private fb: FormBuilder) { }
 
+  get ctlPoiIssues() { return this.form.get('poiIssues'); }
+
   ngOnInit() {
     this.buildForm();
     // console.log('name: ' + this.name);
@@ -26,14 +28,22 @@ export class CreditprofileComponent implements OnInit {
 
   buildForm(): void {
     this.form = this.fb.group({
-      limitedCredit: [{value: false, disabled: true},
-        { updateOn: 'submit' }],
-      poiIssues: [{value: false, disabled: false},
-        { updateOn: 'submit' }]
+      limitedCredit: [{ value: false, disabled: true },
+      { updateOn: 'submit' }],
+      poiIssues: [{ value: false, disabled: true },
+      { updateOn: 'submit' }]
     });
   }
 
   onSubmit() {
 
+  }
+
+  setControlProperties(enable: boolean) {
+    if (enable) {
+      this.ctlPoiIssues!.enable();
+    } else {
+      this.ctlPoiIssues!.disable();
+    }
   }
 }

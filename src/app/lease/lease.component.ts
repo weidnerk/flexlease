@@ -14,6 +14,8 @@ import { CreditprofileComponent } from '../creditprofile/creditprofile.component
 })
 export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild(CreditprofileComponent, { static: false }) creditprofile: CreditprofileComponent;
+
   errorMessage: string;
   wait = false;
   leaseLoaded = false;
@@ -184,11 +186,11 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
         validators: [Validators.required, Validators.minLength(2), Validators.pattern(/^[1-9]\d*$/)],
         updateOn: 'submit'
       }],
-      miles: [null, {
+      miles: [{value: null, disabled: true}, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
       }],
-      vin: [null, {
+      vin: [{value: null, disabled: true}, {
         validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17)],
         updateOn: 'submit'
       }]
@@ -199,21 +201,26 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.annualMiles = Number(event!.value);
   }
 
-  edit(item: any) {
+  onEdit(item: any) {
     this.editingLease = true;
     this.ctlCashDown!.enable();
     this.ctlAnnualMiles!.enable();
+    this.ctlVin!.enable();
+    this.ctlMiles!.enable();
+    this.creditprofile.setControlProperties(true);
   }
 
   onCancelEdit() {
     this.editingLease = false;
     this.ctlCashDown!.disable();
     this.ctlAnnualMiles!.disable();
+    this.creditprofile.setControlProperties(false);
+    this.ctlVin!.disable();
+    this.ctlMiles!.disable();
     this.getLease();  // abandon changes
   }
 
   formIsValid(): boolean {
-
     if (this.ctlAnnualMiles!.invalid) { return false; }
     if (this.ctlCashDown!.invalid) { return false; }
     if (this.ctlMiles!.invalid) { return false; }

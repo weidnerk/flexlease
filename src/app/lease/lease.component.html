@@ -8,7 +8,7 @@
     <form [formGroup]="form" *ngIf="leaseLoaded" class="tabpadding" (ngSubmit)="onStore()" novalidate>
       <h4>
         {{lease.customerApp.firstName}} {{lease.customerApp.lastName}}
-        <button [hidden]="editingLease" type="button" mat-mini-fab (click)="$event.stopPropagation();edit(o);">
+        <button [hidden]="editingLease" type="button" mat-mini-fab (click)="$event.stopPropagation();onEdit(o);">
           <mat-icon>edit</mat-icon>
         </button>
       </h4>
@@ -27,12 +27,9 @@
                   VIN:
                 </td>
                 <td class="numericcell">
-                  <span [hidden]="editingLease">{{vehicle.vin}}</span>
-                  <span [hidden]="!editingLease">
-                    <mat-form-field appearance="outline" class="outlinepadding">
-                      <input matInput formControlName="vin" placeholder="VIN" maxlength="17" class="matinput">
-                    </mat-form-field>
-                  </span>
+                  <mat-form-field appearance="outline" class="outlinepadding">
+                    <input matInput formControlName="vin" placeholder="VIN" maxlength="17" class="matinput">
+                  </mat-form-field>
                 </td>
               </tr>
               <tr>
@@ -40,12 +37,9 @@
                   Miles:
                 </td>
                 <td class="numericcell">
-                  <span [hidden]="editingLease">{{vehicle.miles}}</span>
-                  <span [hidden]="!editingLease">
-                    <mat-form-field appearance="outline" class="outlinepadding">
-                      <input matInput formControlName="miles" placeholder="Miles" maxlength="8" class="matinput">
-                    </mat-form-field>
-                  </span>
+                  <mat-form-field appearance="outline" class="outlinepadding">
+                    <input matInput formControlName="miles" placeholder="Miles" maxlength="8" class="matinput">
+                  </mat-form-field>
                 </td>
               </tr>
             </table>
@@ -100,7 +94,7 @@
                   {{lease.leaseResult.minCashDown.message}}
                 </mat-error>
                 <mat-error *ngIf="ctlCashDown.hasError('pattern')">
-                    <mat-icon>error</mat-icon>&nbsp;
+                  <mat-icon>error</mat-icon>&nbsp;
                   Cash down is invalid
                 </mat-error>
               </div>
@@ -116,9 +110,9 @@
             <div class="row mt-2">
               <div class="col">
                 <p>Annual miles elected</p>
-                <mat-slider formControlName="annualMiles" [invert]="invert" [max]="max"
-                  [min]="min" [step]="step" [thumbLabel]="thumbLabel" [tickInterval]="tick" [displayWith]="formatLabel"
-                  [vertical]="vertical" (change)="onAnnualMilesChange($event)">
+                <mat-slider formControlName="annualMiles" [invert]="invert" [max]="max" [min]="min" [step]="step"
+                  [thumbLabel]="thumbLabel" [tickInterval]="tick" [displayWith]="formatLabel" [vertical]="vertical"
+                  (change)="onAnnualMilesChange($event)">
                 </mat-slider>
               </div>
             </div>
@@ -126,8 +120,8 @@
         </div>
       </div>
       <button [disabled]="!editingLease" mat-button type="submit" tabindex="-1">Update</button>
-      <button [disabled]="!editingLease" mat-button (click)="onCancelEdit(); $event.preventDefault()" color="accent" type="button"
-        tabindex="-1">Exit</button>
+      <button [disabled]="!editingLease" mat-button (click)="onCancelEdit(); $event.preventDefault()" color="accent"
+        type="button" tabindex="-1">Exit</button>
       <button mat-button (click)="onShowDetail(); $event.preventDefault()">{{showDetailLabel}}</button>
       <div [ngClass]="showDetail ? 'show' : 'hide'">
         <button mat-button (click)="accordion.openAll()">Expand All </button>
