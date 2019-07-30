@@ -99,6 +99,10 @@
                   <mat-icon>error</mat-icon>&nbsp;
                   {{lease.leaseResult.minCashDown.message}}
                 </mat-error>
+                <mat-error *ngIf="ctlCashDown.hasError('pattern')">
+                    <mat-icon>error</mat-icon>&nbsp;
+                  Cash down is invalid
+                </mat-error>
               </div>
             </div>
             <div class="row">

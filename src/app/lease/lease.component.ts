@@ -120,6 +120,9 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onStore() {
     console.log('onStore');
+    if (!this.formIsValid()) {
+      return;
+    }
     this.wait = true;
     const app = {} as CustomerApp;
     app.lenderAppId = this.appid;
@@ -178,7 +181,7 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
         updateOn: 'submit'
       }],
       cashDown: [{value: null, disabled: true}, {
-        validators: [Validators.required, Validators.minLength(2)],
+        validators: [Validators.required, Validators.minLength(2), Validators.pattern(/^[1-9]\d*$/)],
         updateOn: 'submit'
       }],
       miles: [null, {
@@ -208,4 +211,14 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
     this.ctlAnnualMiles!.disable();
     this.getLease();  // abandon changes
   }
+
+  formIsValid(): boolean {
+
+    if (this.ctlAnnualMiles!.invalid) { return false; }
+    if (this.ctlCashDown!.invalid) { return false; }
+    if (this.ctlMiles!.invalid) { return false; }
+    if (this.ctlVin!.invalid) { return false; }
+    return true;
+  }
+
 }
