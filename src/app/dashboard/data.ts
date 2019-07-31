@@ -13,19 +13,19 @@ export let crownjaguar = [
 export let single: any =
 [
   {
-    name: '2014',
+    name: '2016',
     value: 5
   },
   {
-    name: '2015',
+    name: '2017',
     value: 10
   },
   {
-    name: '2016',
+    name: '2018',
     value: 8
   },
   {
-    name: '2017',
+    name: '2019',
     value: 15
   }
 ];
