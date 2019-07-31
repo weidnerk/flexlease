@@ -1,0 +1,19 @@
+<h3>Dealer State Profile</h3>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <mat-form-field appearance="outline" class="outlinepadding">
+      <mat-label>Buy factor</mat-label>
+      <input matInput formControlName="buyFactor" placeholder="Buy factor" maxlength="8" class="matinput">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="outline" class="outlinepadding">
+      <mat-label>Sell factor</mat-label>
+      <input matInput formControlName="sellFactor" placeholder="Sell factor" maxlength="8" class="matinput">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button color="accent" type="submit" color="primary" mat-raised-button>Save</button>
+    <button mat-button type="button" (click)="onCancel()" tabindex="-1">Cancel</button>
+  </div>
+</form>

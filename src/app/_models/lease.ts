@@ -109,10 +109,10 @@ export interface ReserveToDealer {
     value: number;
     adjCapitalizedCostResidual: number;
 }
-export interface DealerProfile {
+export interface DealerStateProfile {
     yearModel: string;
-    dlrBuyFactor: number;
-    maxSellFactor: number;
+    buyFactor: number;
+    sellFactor: number;
     regularTerm: number;
 }
 export interface CollectFromLessee {
@@ -155,8 +155,7 @@ export interface TargetLeaseCap {
     markupTarget: number;
     value: number;
 }
-export interface LeaseDiscount
-{
+export interface LeaseDiscount {
     minDiscount: number;
     discountPct: number;
     extraTermDiscount: number;
@@ -164,8 +163,7 @@ export interface LeaseDiscount
     vehAgeAdj: number;
     value: number;
 }
-export interface DealerSaleNetProfit
-{
+export interface DealerSaleNetProfit {
     leaseNetCheck: number;
     downPmt: number;
     tag: number;
@@ -183,15 +181,13 @@ export interface AdjCapCostLimit {
     adjCapCost: number;
     value: number;
 }
-export interface SalePrice
-{
+export interface SalePrice {
     shopFees: number;
     bookValue: number;
     dealerMarkup: number;
     value: number;
 }
-export interface MinCashDown
-{
+export interface MinCashDown {
     cash: number;
     tradein: number;
     tradeinPayoff: number;

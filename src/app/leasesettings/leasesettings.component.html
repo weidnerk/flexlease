@@ -8,7 +8,7 @@
       <app-objectarrayprint objectName="residuals" [object]="residuals" [displayEdit]="true" [formatMap]="{value:'1.2-2'}" [tableStyle]="{'width': '20%'}"></app-objectarrayprint>
     </div>
   </mat-tab>
-  <mat-tab label="Dealer Profile">
+  <mat-tab label="Dealer State Profile">
     <!-- <div *ngIf='dealerProfileLoading'>
       <mat-spinner mode="indeterminate"></mat-spinner>
       <b>Loading...</b>
@@ -23,8 +23,8 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div *ngIf="dealerProfileLoaded">
-      <app-objectarrayprint objectName="dealerProfiles" [object]="dealerProfiles" [displayEdit]="true">
+    <div *ngIf="dealerStateProfileLoaded">
+      <app-objectarrayprint objectName="dealerStateProfiles" [object]="dealerStateProfiles" [displayEdit]="true">
       </app-objectarrayprint>
     </div>
   </mat-tab>

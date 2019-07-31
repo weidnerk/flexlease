@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LeaseResidual, Lease, DealerProfile, YearResidualImpactor } from '../_models';
+import { LeaseResidual, Lease, DealerStateProfile, YearResidualImpactor } from '../_models';
 import { DataService } from '../_services/data.service';
 import { MatSelectChange, MatOption } from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -54,14 +54,14 @@ export class LeaseSettingsComponent implements OnInit {
     { value: 'WY', viewValue: 'WY' }
   ];
   residuals: LeaseResidual[];
-  dealerProfiles: DealerProfile[];
+  dealerStateProfiles: DealerStateProfile[];
   yearResidualImpactors: YearResidualImpactor[];
 
   residualsLoading = false;
-  dealerProfileLoading = false;
+  dealerStateProfileLoading = false;
 
   residualsLoaded = false;
-  dealerProfileLoaded = false;
+  dealerStateProfileLoaded = false;
 
   yearResidualImpactorLoaded = false;
   yearResidualImpactorLoading = false;
@@ -103,8 +103,8 @@ export class LeaseSettingsComponent implements OnInit {
     );
   }
 
-  getDealerProfile(dealerState: string) {
-    this.dealerProfileLoading = true;
+  getDealerStateProfile(dealerState: string) {
+    this.dealerStateProfileLoading = true;
 
     // needs to call with state param
     const filter: string[] = [];
@@ -113,15 +113,15 @@ export class LeaseSettingsComponent implements OnInit {
     filter.push('rateType');
     filter.push('F');
 
-    this.dataService.getValues<DealerProfile>('DealerProfile', undefined, filter).subscribe(
+    this.dataService.getValues<DealerStateProfile>('DealerStateProfile', undefined, filter).subscribe(
       data => {
-        this.dealerProfiles = data;
-        this.dealerProfileLoading = false;
-        this.dealerProfileLoaded = true;
+        this.dealerStateProfiles = data;
+        this.dealerStateProfileLoading = false;
+        this.dealerStateProfileLoaded = true;
       },
       error => {
-        this.dealerProfileLoading = false;
-        this.dealerProfileLoaded = false;
+        this.dealerStateProfileLoading = false;
+        this.dealerStateProfileLoaded = false;
         this.errorMessage = error;
       }
       ,      // in case of failure show this message
@@ -130,7 +130,7 @@ export class LeaseSettingsComponent implements OnInit {
   }
 
   getYearResidualImpactor() {
-    this.dealerProfileLoading = true;
+    this.dealerStateProfileLoading = true;
     this.dataService.getValues<YearResidualImpactor>('YearResidualImpactor').subscribe(
       data => {
         this.yearResidualImpactors = data;
@@ -152,6 +152,6 @@ export class LeaseSettingsComponent implements OnInit {
       value: event.source.value
     };
     // console.log(selectedData.value);
-    this.getDealerProfile(selectedData.value);
+    this.getDealerStateProfile(selectedData.value);
   }
 }

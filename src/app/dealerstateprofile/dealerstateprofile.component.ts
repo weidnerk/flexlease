@@ -1,39 +1,39 @@
 /**
- * Intended to be used by objectarrayprint to edit year residual impactors.
+ * Intended to be used by objectarrayprint to edit dealer state profiles.
  */
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { YearResidualImpactor } from '../_models';
+import { DealerStateProfile } from '../_models';
 
 @Component({
-  selector: 'app-yearresidualimpactor',
-  templateUrl: './yearresidualimpactor.component.html',
-  styleUrls: ['./yearresidualimpactor.component.scss']
+  selector: 'app-dealerstateprofile',
+  templateUrl: './dealerstateprofile.component.html',
+  styleUrls: ['./dealerstateprofile.component.scss']
 })
-export class YearresidualimpactorComponent implements OnInit {
+export class DealerstateprofileComponent implements OnInit {
 
   form: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private dialogRef: MatDialogRef<YearresidualimpactorComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { rec: YearResidualImpactor }) { }
+              private dialogRef: MatDialogRef<DealerstateprofileComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: { rec: DealerStateProfile }) { }
 
   ngOnInit() {
     this.buildForm();
     this.form.patchValue({
-      impactPct: this.data.rec.impactPct,
-      yearModel: this.data.rec.yearModel
+      buyFactor: this.data.rec.buyFactor,
+      sellFactor: this.data.rec.sellFactor
     });
   }
 
   buildForm(): void {
     this.form = this.fb.group({
-      yearModel: [null, {
+      buyFactor: [null, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
       }],
-      impactPct: [null, {
+      sellFactor: [null, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
       }]

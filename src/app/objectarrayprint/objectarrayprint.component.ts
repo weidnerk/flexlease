@@ -5,10 +5,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog, getMatInputUnsupportedTypeError } from '@angular/material';
 import { YearresidualimpactorComponent } from '../yearresidualimpactor/yearresidualimpactor.component';
+import { DealerstateprofileComponent } from '../dealerstateprofile/dealerstateprofile.component';
 
 // If allowing edits, add the edit form component here.  Will also need to import in module.
+// 'key' (such as Yearresidualimpactors) is objectName param passed to objectarrayprint (see leasesettings.component.html).
+// Note: Component must be added to entryComponents in leasesettings.module.
 const compMap = {
-  Yearresidualimpactors: YearresidualimpactorComponent
+  Yearresidualimpactors: YearresidualimpactorComponent,
+  dealerStateProfiles: DealerstateprofileComponent
 };
 
 @Component({
@@ -66,7 +70,7 @@ export class ObjectarrayprintComponent implements OnInit {
     }
   }
 
-  edit(item: any) {
+  onEdit(item: any) {
     if (this.objectName in compMap) {
 
       const dialogRef = this.dialog.open(compMap[this.objectName], {

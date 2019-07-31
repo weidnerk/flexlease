@@ -27,7 +27,7 @@ export class DataService {
     private getDealersUrl: string = environment.API_DEALER_ENDPOINT + 'dealers';
     private getDealerUrl: string = environment.API_DEALER_ENDPOINT + 'flexdealer';
     private getLeaseResidualsArrayUrl: string = environment.API_ENDPOINT + 'leaseresiduals';
-    private getDealerProfileArrayUrl: string = environment.API_ENDPOINT + 'dealerprofile';
+    private getDealerStateProfileArrayUrl: string = environment.API_ENDPOINT + 'dealerstateprofile';
     private getYearResidualImpactorArrayUrl: string = environment.API_ENDPOINT + 'yearresidualimpactor';
 
     private postMaintenanceValueUrl: string = environment.API_MAINT_ENDPOINT;
@@ -188,7 +188,7 @@ export class DataService {
         getListUrlMap.set('FLEXDealer', this.getDealersUrl);
         getListUrlMap.set('MaintenanceValue', this.getMaintValuesUrl);
         getListUrlMap.set('LeaseResidual', this.getLeaseResidualsArrayUrl);
-        getListUrlMap.set('DealerProfile', this.getDealerProfileArrayUrl);
+        getListUrlMap.set('DealerStateProfile', this.getDealerStateProfileArrayUrl);
         getListUrlMap.set('YearResidualImpactor', this.getYearResidualImpactorArrayUrl);
 
         // getFromArrayUrlMap.set('MaintenanceValue', this.getMaintValueArrayUrl);
