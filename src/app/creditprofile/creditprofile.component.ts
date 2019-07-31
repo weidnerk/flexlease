@@ -14,6 +14,7 @@ export class CreditprofileComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   get ctlPoiIssues() { return this.form.get('poiIssues'); }
+  get ctlTempJobs() { return this.form.get('tempJobs'); }
 
   ngOnInit() {
     this.buildForm();
@@ -21,7 +22,8 @@ export class CreditprofileComponent implements OnInit {
     // console.log('limited credit:' + JSON.stringify(this.disclosures));
     if (this.disclosures) {
       this.form.patchValue({
-        limitedCredit: this.disclosures.limitedCredit
+        limitedCredit: this.disclosures.limitedCredit,
+        tempJobs: this.disclosures.tempJobs
       });
     }
   }
@@ -31,6 +33,8 @@ export class CreditprofileComponent implements OnInit {
       limitedCredit: [{ value: false, disabled: true },
       { updateOn: 'submit' }],
       poiIssues: [{ value: false, disabled: true },
+      { updateOn: 'submit' }],
+      tempJobs: [{ value: false, disabled: true },
       { updateOn: 'submit' }]
     });
   }
@@ -42,8 +46,10 @@ export class CreditprofileComponent implements OnInit {
   setControlProperties(enable: boolean) {
     if (enable) {
       this.ctlPoiIssues!.enable();
+      this.ctlTempJobs!.enable();
     } else {
       this.ctlPoiIssues!.disable();
+      this.ctlTempJobs!.disable();
     }
   }
 }

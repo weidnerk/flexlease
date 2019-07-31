@@ -8,6 +8,7 @@ import { ObjectprintComponent } from '../objectprint/objectprint.component';
 import { MainPipe } from '../_pipes/main-pipe.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreditprofileModule } from '../creditprofile/creditprofile.module';
+import { AlertModule } from '../_alert/alert.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CreditprofileModule } from '../creditprofile/creditprofile.module';
     MainPipe,
     MatTabsModule,
     ReactiveFormsModule,
-    CreditprofileModule
+    CreditprofileModule,
+    AlertModule
   ],
   providers: [DataService]
 })

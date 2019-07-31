@@ -14,6 +14,7 @@ export interface CustomerApp {
     dealerName: string | null;
     annualMiles: number;
     disclosures: CustomerAppDisclosures | null;
+    createDate: Date;
 }
 export interface CustomerAppAddress {
     zip: string;

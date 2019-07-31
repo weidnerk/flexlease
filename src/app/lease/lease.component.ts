@@ -6,6 +6,7 @@ import { DataService } from '../_services/data.service';
 import { MatAccordion, MatExpansionPanel, MatSlider, MatSliderChange } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreditprofileComponent } from '../creditprofile/creditprofile.component';
+import { AlertService } from '../_alert/alert.service';
 
 @Component({
   selector: 'app-lease',
@@ -53,7 +54,8 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private activatedroute: ActivatedRoute,
               private dataService: DataService,
-              private fb: FormBuilder) { }
+              private fb: FormBuilder,
+              private alertService: AlertService) { }
 
   get ctlAnnualMiles() { return this.form.get('annualMiles'); }
   get ctlCashDown() { return this.form.get('cashDown'); }
@@ -66,8 +68,8 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
       this.appid = params.appid;
       this.getLease();
       this.getVehicle();
+      this.info('test alert');  // displays nothing - only button is working
     });
-
   }
   ngAfterViewInit() {
     // console.log('afterViewInit');
@@ -121,7 +123,6 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onStore() {
-    console.log('onStore');
     if (!this.formIsValid()) {
       return;
     }
@@ -227,5 +228,10 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.ctlVin!.invalid) { return false; }
     return true;
   }
-
+  info(message: string) {
+    this.alertService.info(message);
+  }
+  warn(message: string) {
+    this.alertService.warn(message);
+  }
 }

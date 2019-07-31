@@ -6,13 +6,18 @@
         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
     </span>
     <form [formGroup]="form" *ngIf="leaseLoaded" class="tabpadding" (ngSubmit)="onStore()" novalidate>
-      <h4>
-        {{lease.customerApp.firstName}} {{lease.customerApp.lastName}}
-        <button [hidden]="editingLease" type="button" mat-mini-fab (click)="$event.stopPropagation();onEdit(o);">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </h4>
+      <div style="float: left;">
+        <h3>
+          {{lease.customerApp.firstName}} {{lease.customerApp.lastName}}
+          <button [hidden]="editingLease" type="button" class="my-fab" mat-mini-fab (click)="$event.stopPropagation();onEdit(o);">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </h3>
+      </div>
+      <div style="float:right;">Created: {{lease.customerApp.createDate | date:'MM/dd/yyyy'}}</div>
+      <div style="clear:both;"></div>
       <div class="container-fluid">
+        <!-- 'container' will center instead of using full width -->
         <div class="row">
           <div class="col border border-light rounded" *ngIf="vehicleLoaded">
             <table>
@@ -123,6 +128,10 @@
       <button [disabled]="!editingLease" mat-button (click)="onCancelEdit(); $event.preventDefault()" color="accent"
         type="button" tabindex="-1">Exit</button>
       <button mat-button (click)="onShowDetail(); $event.preventDefault()">{{showDetailLabel}}</button>
+      <div class="container text-left">
+        <app-alert></app-alert>
+      </div>
+      <button type="button" class="btn btn-info m-1" (click)="info('Some info....')">Info</button>
       <div [ngClass]="showDetail ? 'show' : 'hide'">
         <button mat-button (click)="accordion.openAll()">Expand All </button>
         <button mat-button (click)="accordion.closeAll()">Collapse All </button>
