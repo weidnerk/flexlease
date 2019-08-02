@@ -17,6 +17,8 @@ export class DataService {
 
     private getLeaseUrl: string = environment.API_ENDPOINT + 'lease';
     private getLeasesUrl: string = environment.API_ENDPOINT + 'appsview/lease';
+    private getLastEditedUrl: string = environment.API_ENDPOINT + 'lastedited';
+
     private getVehicleUrl: string = environment.API_VEHICLE_ENDPOINT + 'vehicle';
     private getVehicleModelUrl: string = environment.API_VEHICLE_ENDPOINT + 'vehiclemodel';
     private getMakesUrl: string = environment.API_VEHICLE_ENDPOINT + 'vehiclemakes';
@@ -181,6 +183,7 @@ export class DataService {
         getUrlMap.set('Vehicle', this.getVehicleUrl);
         getUrlMap.set('VehicleModel', this.getVehicleModelUrl);
         getUrlMap.set('FLEXDealer', this.getDealerUrl);
+        getUrlMap.set('string', this.getLastEditedUrl);
 
         getListUrlMap.set('Lease', this.getLeasesUrl);
         getListUrlMap.set('VehicleMake', this.getMakesUrl);
@@ -200,14 +203,3 @@ export class DataService {
         postFromArrayUrlMap.set('MaintenanceValue', this.postMaintenanceValueUrl);
     }
 }
-
-// function isFLEXDealer(obj: FLEXDealer | MaintenanceValue): obj is FLEXDealer {
-//     return (obj as FLEXDealer).dba !== undefined;
-// }
-
-// function isFLEXDealer(toBeDetermined: any): toBeDetermined is FLEXDealer {
-//     if ((toBeDetermined as FLEXDealer)._FLEXDealer) {
-//       return true;
-//     }
-//     return false;
-//   }

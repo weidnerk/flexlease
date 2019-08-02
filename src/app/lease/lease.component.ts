@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Lease, Vehicle, CustomerApp } from '../_models';
@@ -13,7 +13,7 @@ import { AlertService } from '../_alert/alert.service';
   templateUrl: './lease.component.html',
   styleUrls: ['./lease.component.scss']
 })
-export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
+export class LeaseComponent implements OnInit, OnDestroy {
 
   @ViewChild(CreditprofileComponent, { static: false }) creditprofile: CreditprofileComponent;
 
@@ -63,17 +63,19 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
   get ctlVin() { return this.form.get('vin'); }
 
   ngOnInit() {
+    // setTimeout(() => {
+    //   this.info('Last edited by:');
+    //   }, 1);
+
     this.buildForm();
     this.paramsSubscription = this.activatedroute.params.subscribe(params => {
       this.appid = params.appid;
       this.getLease();
       this.getVehicle();
-      this.info('test alert');  // displays nothing - only button is working
+      this.getLastEdited();
     });
   }
-  ngAfterViewInit() {
-    // console.log('afterViewInit');
-  }
+
   ngOnDestroy() {
     // console.log('ngOnDestroy');
     this.paramsSubscription.unsubscribe();
@@ -234,4 +236,19 @@ export class LeaseComponent implements OnInit, OnDestroy, AfterViewInit {
   warn(message: string) {
     this.alertService.warn(message);
   }
+
+  getLastEdited() {
+    this.dataService.getValue<string>('string', this.appid).subscribe(
+      data => {
+        if (data) { this.info(data); }
+      },
+      error => {
+        console.log('getLastEdited: ' + error);
+        this.errorMessage = error;
+      }
+      ,      // in case of failure show this message
+      () => console.log('Job Done Post !')
+    );
+  }
+
 }

@@ -10,6 +10,12 @@ import { ASPNETMembershipUser } from '../_models';
 export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
+    /**
+     * Curious method does not return type Observable (see Jason Watmore)
+     * @param username 
+     * @param password 
+     * @param apikey 
+     */
     login(username, password, apikey) {
 
         const url = environment.LOGIN_API_ENDPOINT + 'login';

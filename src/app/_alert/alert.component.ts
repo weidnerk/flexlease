@@ -17,11 +17,13 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.subscription = this.alertService.onAlert(this.id)
             .subscribe(alert => {
                 if (!alert.message) {
+                    console.log('clear alerts');
                     // clear alerts when an empty alert is received
                     this.alerts = [];
                     return;
                 }
 
+                console.log('add alert');
                 // add alert to array
                 this.alerts.push(alert);
             });

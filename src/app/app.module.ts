@@ -18,7 +18,6 @@ import { AuthGuard } from './_guards/index';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatPassToggleVisibilityComponent } from './mat-pass-toggle-visibility/mat-pass-toggle-visibility.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

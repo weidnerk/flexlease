@@ -1,4 +1,7 @@
 <span style="color:red">{{ errorMessage }}</span>
+<div class="container text-left">
+  <app-alert></app-alert>
+</div>
 <mat-tab-group>
   <mat-tab label="Lease">
     <span *ngIf="wait">
@@ -132,10 +135,6 @@
       <button [disabled]="!editingLease" mat-button (click)="onCancelEdit(); $event.preventDefault()" color="accent"
         type="button" tabindex="-1">Exit</button>
       <button mat-button (click)="onShowDetail(); $event.preventDefault()">{{showDetailLabel}}</button>
-      <div class="container text-left">
-        <app-alert></app-alert>
-      </div>
-      <button type="button" class="btn btn-info m-1" (click)="info('Some info....')">Info</button>
       <div [ngClass]="showDetail ? 'show' : 'hide'">
         <button mat-button (click)="accordion.openAll()">Expand All </button>
         <button mat-button (click)="accordion.closeAll()">Collapse All </button>

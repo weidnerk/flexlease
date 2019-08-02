@@ -6,7 +6,7 @@ import { MatButtonModule, MatTabsModule, MatInputModule, MatIconModule, MatSlide
 import { DataService } from '../_services/data.service';
 import { ObjectprintComponent } from '../objectprint/objectprint.component';
 import { MainPipe } from '../_pipes/main-pipe.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CreditprofileModule } from '../creditprofile/creditprofile.module';
 import { AlertModule } from '../_alert/alert.module';
 
