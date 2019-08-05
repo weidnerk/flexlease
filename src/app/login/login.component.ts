@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
     this.loading = true;
     this.authenticationService.login(this.model.Username, this.model.Password, environment.API_KEY)
       .subscribe(
@@ -50,4 +49,5 @@ export class LoginComponent implements OnInit {
           }
         });
   }
+
 }

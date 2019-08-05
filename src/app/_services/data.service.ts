@@ -73,7 +73,6 @@ export class DataService {
     /**
      * Get list of values (such as tblMakes, but tblModels needs makeId)
      * Optionally pass either an id or a 2D array of a field name and value to search
-     * How to pass a predicate to the API?
      * @param typeName 
      * @param id 
      * @param where 
@@ -145,6 +144,7 @@ export class DataService {
         const userJson = localStorage.getItem('currentUser');
         if (userJson) {
             const currentUser = JSON.parse(userJson);
+            url += '&username=' + currentUser.username;     // give server way to identify user
             const httpOptions = { headers: new HttpHeaders({ 'API_KEY': this.API_KEY }) };
             return this.http.post<T[]>(url, value, httpOptions).pipe(
                 catchError(this.handleError)

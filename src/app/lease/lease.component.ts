@@ -53,9 +53,9 @@ export class LeaseComponent implements OnInit, OnDestroy {
   // End slider settings
 
   constructor(private activatedroute: ActivatedRoute,
-              private dataService: DataService,
-              private fb: FormBuilder,
-              private alertService: AlertService) { }
+    private dataService: DataService,
+    private fb: FormBuilder,
+    private alertService: AlertService) { }
 
   get ctlAnnualMiles() { return this.form.get('annualMiles'); }
   get ctlCashDown() { return this.form.get('cashDown'); }
@@ -181,19 +181,19 @@ export class LeaseComponent implements OnInit, OnDestroy {
   }
   buildForm(): void {
     this.form = this.fb.group({
-      annualMiles: [{value: null, disabled: true}, {
+      annualMiles: [{ value: null, disabled: true }, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
       }],
-      cashDown: [{value: null, disabled: true}, {
+      cashDown: [{ value: null, disabled: true }, {
         validators: [Validators.required, Validators.minLength(2), Validators.pattern(/^[1-9]\d*$/)],
         updateOn: 'submit'
       }],
-      miles: [{value: null, disabled: true}, {
+      miles: [{ value: null, disabled: true }, {
         validators: [Validators.required, Validators.minLength(2)],
         updateOn: 'submit'
       }],
-      vin: [{value: null, disabled: true}, {
+      vin: [{ value: null, disabled: true }, {
         validators: [Validators.required, Validators.minLength(17), Validators.maxLength(17)],
         updateOn: 'submit'
       }]
@@ -240,7 +240,9 @@ export class LeaseComponent implements OnInit, OnDestroy {
   getLastEdited() {
     this.dataService.getValue<string>('string', this.appid).subscribe(
       data => {
-        if (data) { this.info(data); }
+        if (data) {
+            this.info(data);
+        }
       },
       error => {
         console.log('getLastEdited: ' + error);
