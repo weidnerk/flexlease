@@ -41,7 +41,8 @@ export class YearresidualimpactorComponent implements OnInit {
   }
 
   onSubmit() {
-
+    if (this.form.valid) {
+    }
   }
 
   onCancel() {

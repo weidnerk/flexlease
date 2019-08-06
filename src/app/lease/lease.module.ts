@@ -8,7 +8,7 @@ import { ObjectprintComponent } from '../objectprint/objectprint.component';
 import { MainPipe } from '../_pipes/main-pipe.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreditprofileModule } from '../creditprofile/creditprofile.module';
-import { AlertModule } from '../_alert/alert.module';
+import { AlertModule } from '../_alert';
 
 @NgModule({
   declarations: [

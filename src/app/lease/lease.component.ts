@@ -26,7 +26,7 @@ export class LeaseComponent implements OnInit, OnDestroy {
   loadingVehicle = false;
   vehicle: Vehicle;
   vehicleLoaded = false;
-  ame: number;
+  ame: number;  // annual miles elected
   showDetail = false;
   showDetailLabel = 'Show Detail';
   form: FormGroup;
@@ -38,6 +38,8 @@ export class LeaseComponent implements OnInit, OnDestroy {
 
   adjCapCostKeys: string[] = [];
   adjCapCostValues: string[] = [];
+
+  startLoadTime: Date;
 
   // 'Annual miles elected' slider settings
   autoTicks = false;
@@ -83,6 +85,7 @@ export class LeaseComponent implements OnInit, OnDestroy {
 
   // Get lease and calculate
   getLease() {
+    this.startLoadTime = new Date();
     this.wait = true;
     this.dataService.getValue<Lease>('Lease', this.appid).subscribe(
       data => {
@@ -95,6 +98,9 @@ export class LeaseComponent implements OnInit, OnDestroy {
           vin: this.vehicle.vin
         });
         this.wait = false;
+        const ct = new Date();
+        const diff = (ct.getTime() - this.startLoadTime.getTime()) / 1000;
+        this.info('getLease: ' + diff.toString() + ' ms');
       },
       error => {
         this.wait = false;

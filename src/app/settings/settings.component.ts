@@ -15,7 +15,8 @@ export class SettingsComponent implements OnInit {
     ) {
     const dialogRef = this.dialog.open(SettingsdialogComponent, {
       height: '650px',
-      width: '700px'
+      width: '700px',
+      disableClose: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

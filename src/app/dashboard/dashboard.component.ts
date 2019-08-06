@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { crownhonda } from './data';
 import { crownjaguar } from './data';
 import { single } from './data';
+import { AlertService } from '../_alert';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.sass']
+  styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
   crownhonda: any[];
   crownjaguar: any[];
@@ -24,13 +25,21 @@ export class DashboardComponent {
     domain: ['#FF69B4']  // #03A9F4
   };
 
-  constructor() {
+  constructor(private alertService: AlertService) {
 
     Object.assign(this, {
       crownhonda,
       crownjaguar,
       single
     });
+  }
+
+  ngOnInit() {
+    const str = `By using our site, you acknowledge that you have read and
+                understand our Cookie Policy, Privacy Policy, and our Terms of Service.`;
+    // setTimeout(() => {
+    //   this.alertService.info(str);
+    //   }, 1);
   }
 
   onSelect(event) {

@@ -103,11 +103,9 @@ export class VehiclesettingsComponent implements OnInit {
         error => {
           this.errorMessage = error;
         });
-
   }
 
   onSubmit() {
-
     if (this.form.valid) {
       const model = {} as VehicleModel;
       model.ID = this.modelId!.value;
@@ -123,7 +121,6 @@ export class VehiclesettingsComponent implements OnInit {
         ,      // in case of failure show this message
         () => console.log('Job Done Post !')
       );
-
     } else {
       this.errorMessage = 'Form is invalid.';
     }
