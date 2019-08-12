@@ -7,6 +7,7 @@ import { MatAccordion, MatExpansionPanel, MatSlider, MatSliderChange } from '@an
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreditprofileComponent } from '../creditprofile/creditprofile.component';
 import { AlertService } from '../_alert/alert.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lease',
@@ -70,8 +71,8 @@ export class LeaseComponent implements OnInit, OnDestroy {
     //   }, 1);
 
     this.buildForm();
-    this.paramsSubscription = this.activatedroute.params.subscribe(params => {
-      this.appid = params.appid;
+    this.paramsSubscription = this.activatedroute.paramMap.subscribe(params => {
+      this.appid = Number(params.get('appid'));
       this.getLease();
       this.getVehicle();
       this.getLastEdited();
@@ -79,7 +80,6 @@ export class LeaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // console.log('ngOnDestroy');
     this.paramsSubscription.unsubscribe();
   }
 
@@ -107,8 +107,6 @@ export class LeaseComponent implements OnInit, OnDestroy {
         console.log('getLease: ' + error);
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 
@@ -125,8 +123,6 @@ export class LeaseComponent implements OnInit, OnDestroy {
         console.log('getVehicle: ' + error);
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 
@@ -153,8 +149,6 @@ export class LeaseComponent implements OnInit, OnDestroy {
         this.editingLease = false;
         this.wait = false;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 
@@ -254,8 +248,6 @@ export class LeaseComponent implements OnInit, OnDestroy {
         console.log('getLastEdited: ' + error);
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 

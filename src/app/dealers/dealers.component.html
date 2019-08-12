@@ -4,7 +4,10 @@
   <b>Loading...</b>
 </div>
 <div>
-  <input type="text" placeholder="Search..." class="margin">
+  <input matInput #filter type="text" placeholder="Search..." class="margin">
+  <button mat-icon-button (click)="$event.stopPropagation();onFilter();">
+    <mat-icon>search</mat-icon>
+  </button>
 </div>
 <div>
   <!-- don't forget to include FlexLayoutModule -->

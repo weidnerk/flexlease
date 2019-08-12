@@ -98,8 +98,6 @@ export class LeaseSettingsComponent implements OnInit {
         this.residualsLoaded = false;
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 
@@ -124,8 +122,6 @@ export class LeaseSettingsComponent implements OnInit {
         this.dealerStateProfileLoaded = false;
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 
@@ -142,8 +138,6 @@ export class LeaseSettingsComponent implements OnInit {
         this.yearResidualImpactorLoaded = false;
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
   stateSelected(event: MatSelectChange) {

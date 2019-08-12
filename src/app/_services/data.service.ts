@@ -75,7 +75,11 @@ export class DataService {
      * Optionally pass either an id or a 2D array of a field name and value to search
      * @param typeName 
      * @param id 
-     * @param where 
+     * @param where Example:
+     *      const filter: string[] = [];
+     *      filter.push('program');
+     *      filter.push('POS2');
+     *      which means that field 'program' = 'POS2'
      */
     getValues<T>(typeName: string, id?: number, where?: string[]): Observable<T[]> {
         let url = getListUrlMap.get(typeName);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../_services/data.service';
 import { FLEXDealer } from '../_models/dealer';
 import { MatDialog } from '@angular/material';
@@ -10,6 +10,7 @@ import { DealersettingsdialogComponent } from '../dealersettingsdialog/dealerset
   styleUrls: ['./dealers.component.scss']
 })
 export class DealersComponent implements OnInit {
+  @ViewChild('filter', { static: false }) filter: ElementRef;
 
   loading = false;
   errorMessage = '';
@@ -19,15 +20,13 @@ export class DealersComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getDealers();
+    this.getDealers([]);
   }
 
-  getDealers() {
-    const filter: string[] = [];
-    filter.push('program');
-    filter.push('POS2');
+  getDealers(filterArray: string[]) {
+
     this.loading = true;
-    this.dataService.getValues<FLEXDealer>('FLEXDealer', undefined, filter).subscribe(
+    this.dataService.getValues<FLEXDealer>('FLEXDealer', undefined, filterArray).subscribe(
       data => {
         this.dealers = data;
         this.loading = false;
@@ -53,7 +52,17 @@ export class DealersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-
   }
 
+  onFilter() {
+    const search = this.filter.nativeElement.value;
+    if (search) {
+      const filterArray: string[] = [];
+      filterArray.push('DBA');
+      filterArray.push(search);
+      this.getDealers(filterArray);
+    } else {
+      this.getDealers([]);
+    }
+  }
 }

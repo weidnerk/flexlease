@@ -29,8 +29,6 @@ export class LeasesComponent implements OnInit {
         this.loading = false;
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 }

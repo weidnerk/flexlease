@@ -204,8 +204,6 @@ export class SettingsdialogComponent implements OnInit {
         console.log('getLease: ' + error);
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 
@@ -274,8 +272,6 @@ export class SettingsdialogComponent implements OnInit {
       error => {
         console.log('storeMaintValue: ' + error);
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 }

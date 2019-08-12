@@ -54,8 +54,6 @@ export class DealersettingsdialogComponent implements OnInit {
         console.log('getDealer: ' + error);
         this.errorMessage = error;
       }
-      ,      // in case of failure show this message
-      () => console.log('Job Done Post !')
     );
   }
 
@@ -100,8 +98,6 @@ export class DealersettingsdialogComponent implements OnInit {
           console.log('storeDealer: ' + error);
           this.errorMessage = error;
         }
-        ,      // in case of failure show this message
-        () => console.log('Job Done Post !')
       );
     } else {
       this.errorMessage = 'Form is invalid.';
