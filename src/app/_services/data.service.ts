@@ -40,7 +40,7 @@ export class DataService {
     private API_KEY: string = environment.API_KEY;
 
     constructor(private http: HttpClient) {
-        this.SetUrlMappings();
+        this.setUrlMappings();
     }
 
     /**
@@ -182,7 +182,7 @@ export class DataService {
         }
     }
 
-    private SetUrlMappings() {
+    private setUrlMappings() {
         getUrlMap.set('Lease', this.getLeaseUrl);
         getUrlMap.set('Vehicle', this.getVehicleUrl);
         getUrlMap.set('VehicleModel', this.getVehicleModelUrl);
