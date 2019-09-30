@@ -198,8 +198,6 @@ export class DataService {
         getListUrlMap.set('DealerStateProfile', this.getDealerStateProfileArrayUrl);
         getListUrlMap.set('YearResidualImpactor', this.getYearResidualImpactorArrayUrl);
 
-        // getFromArrayUrlMap.set('MaintenanceValue', this.getMaintValueArrayUrl);
-
         postUrlMap.set('VehicleModel', this.postVehicleModelValueUrl);
         postUrlMap.set('CustomerApp', this.postLeaseUrl);
         postUrlMap.set('FLEXDealer', this.postDealerUrl);

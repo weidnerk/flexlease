@@ -30,7 +30,7 @@ export class ObjectarrayprintComponent implements OnInit {
                                   // Employed by getFormat() below
   @Input() tableStyle: any;       // Table ngStyle, template is implemented as a table, provide formatting object
                                   //  such as: [tableStyle]="{'width': '20%'}"
-
+  @Input() displayField: any;
   constructor(public dialog: MatDialog) { }
 
   arrName: string[][];
@@ -101,5 +101,17 @@ export class ObjectarrayprintComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  showField(fieldName: string): boolean {
+    if (this.displayField) {
+      if (this.displayField[fieldName]) {
+        const r = this.displayField[fieldName];
+        if (r === '0') {
+        return false;
+        } else { return true; }
+      }
+    }
+    return true;
   }
 }

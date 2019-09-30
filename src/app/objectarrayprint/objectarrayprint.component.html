@@ -2,19 +2,25 @@
   <thead>
     <tr>
       <th style="text-align: left;" *ngFor="let k of keys">
-        {{k | fieldnameprint}}
+        <span *ngIf="showField(k)">
+          {{k | fieldnameprint}}
+        </span>
       </th>
     </tr>
   </thead>
   <tr *ngFor="let o of object">
+
     <td *ngFor="let p of getObjectValues(o); index as i" [ngClass]="{numericcell: isNumber(p)}">
-      <span *ngIf="!isObject(p); else showObject">
-        {{ !getFormat(keys[i]) ? p : (p | number : getFormat(keys[i])) }}
+      <span *ngIf="showField(p)">
+        <span *ngIf="!isObject(p); else showObject">
+          {{ !getFormat(keys[i]) ? p : (p | number : getFormat(keys[i])) }}
+        </span>
+        <ng-template #showObject>
+          <app-objectarrayprint [object]="objectToArray(p)" [displayEdit]="false" objectName=""></app-objectarrayprint>
+        </ng-template>
       </span>
-      <ng-template #showObject>
-        <app-objectarrayprint [object]="objectToArray(p)" [displayEdit]="false" objectName=""></app-objectarrayprint>
-      </ng-template>
     </td>
+
     <td *ngIf="displayEdit">
       <button mat-icon-button (click)="$event.stopPropagation();onEdit(o);">
         <mat-icon>edit</mat-icon>

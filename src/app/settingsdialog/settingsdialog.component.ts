@@ -117,7 +117,7 @@ export class SettingsdialogComponent implements OnInit {
    */
   loadData() {
     this.loading = true;
-    this.dataService.getValues<MaintenanceValue>('MaintenanceValue').subscribe(
+    this.dataService.getValues<MaintenanceValue>('MaintenanceValue', undefined, ['filename', 'LEASE']).subscribe(
       data => {
         this.maintValues = data;
         this.loading = false;
